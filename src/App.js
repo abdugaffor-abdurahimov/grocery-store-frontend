@@ -1,23 +1,25 @@
-import logo from "./logo.svg";
 import "./App.scss";
+import { Route, useLocation } from "react-router-dom";
+import { Login, Register } from "./pages/auth";
+import Home from "./pages/home";
+import DrawerCard from "./components/navbars/CartDrawer";
+import Appbar from "./components/navbars/Appbar";
 
 function App() {
+  const location = useLocation();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Route path="/login" exact component={Login} />
+      <Route path="/register" exact component={Register} />
+      <Route path="/" exact component={Home} />
+
+      {location.pathname === "/login" || location.pathname === "/register" || (
+        <>
+          <Appbar />
+          <DrawerCard />
+        </>
+      )}
     </div>
   );
 }

@@ -1,5 +1,19 @@
 .App {
   text-align: center;
+  display: flex;
+
+  button,
+  a {
+    border-radius: 50px;
+  }
+
+  .MuiAlert-icon {
+    width: 12px;
+  }
+
+  .MuiAlert-root {
+    padding: 0;
+  }
 }
 
 .App-logo {

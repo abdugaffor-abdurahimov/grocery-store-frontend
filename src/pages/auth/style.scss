@@ -1,0 +1,33 @@
+.auth-grid {
+  min-height: 80vh;
+
+  form {
+    width: 100%;
+    text-align: end;
+  }
+
+  div {
+    width: 350px;
+  }
+
+  button,
+  a {
+    width: 100%;
+  }
+
+  .MuiTypography-body2 {
+    margin-top: 40px;
+  }
+
+  .MuiFormControlLabel-root {
+    width: 100%;
+    text-align: start;
+    margin: 10px 0;
+  }
+
+  .terms {
+    color: #4b4b4b;
+    margin: 20px 10px;
+    font-size: 11px;
+  }
+}
