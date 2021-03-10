@@ -3,12 +3,16 @@ import {
   Drawer,
   makeStyles,
   Toolbar,
-  Typography,
+  // Typography,
 } from "@material-ui/core";
 import React, { useState } from "react";
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
 import CategoryDrawer from "./CategoryDrawer";
+import { Link } from "react-router-dom";
+import { StyledBadge } from "../elements/Badges";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 
 const drawerWidth = 240;
 
@@ -56,9 +60,23 @@ export default function Appbar() {
         <Drawer open={drawerOpen} onClose={toggleDrawer}>
           {CategoryDrawer()}
         </Drawer>
-        <Typography variant="h6" noWrap>
+        {/* <Typography variant="h6" noWrap component={Link} to="/">
           Permanent drawer
-        </Typography>
+        </Typography> */}
+        <Link to="/">Home</Link>
+
+        <input type="text" />
+
+        <Link to="#">
+          <PermIdentityIcon />
+          Hi, usernames
+        </Link>
+
+        <IconButton aria-label="cart">
+          <StyledBadge badgeContent={4} color="secondary">
+            <ShoppingCartIcon />
+          </StyledBadge>
+        </IconButton>
       </Toolbar>
     </AppBar>
   );
