@@ -12,9 +12,9 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
-const drawerWidth = 240;
+const drawerWidth = 320;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
@@ -30,12 +30,14 @@ export default function CartDrawer() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    if (width > 500) {
+    if (width > 1000) {
       setShow(true);
+    } else {
+      setShow(false);
     }
   }, [width]);
 
-  return (
+  return show ? (
     <Drawer
       className={classes.drawer}
       variant="permanent"
@@ -68,5 +70,7 @@ export default function CartDrawer() {
         ))}
       </List>
     </Drawer>
+  ) : (
+    <></>
   );
 }
