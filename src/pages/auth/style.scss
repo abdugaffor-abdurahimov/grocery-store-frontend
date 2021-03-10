@@ -1,18 +1,18 @@
 .auth-grid {
-  height: 80vh;
+  min-height: 80vh;
 
   form {
-    width: 300px;
+    width: 100%;
     text-align: end;
   }
 
   div {
-    width: 300px;
+    width: 350px;
   }
 
   button,
   a {
-    width: 300px;
+    width: 100%;
   }
 
   .MuiTypography-body2 {
