@@ -16,7 +16,9 @@ function App() {
       <Route path="/login" exact component={Login} />
       <Route path="/register" exact component={Register} />
 
-      <Route path="/" exact component={Home} />
+      <main id="shoppingContent">
+        <Route path="/" exact component={Home} />
+      </main>
 
       {location.pathname === "/login" || location.pathname === "/register" || (
         <>
