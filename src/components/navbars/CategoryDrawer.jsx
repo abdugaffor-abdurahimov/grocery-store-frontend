@@ -19,6 +19,7 @@ const useStyles = makeStyles(() => ({
 
 export default function CategoryDrawer() {
   const classes = useStyles();
+
   return (
     <div role="presentation" className={clsx(classes.list)}>
       <List>
