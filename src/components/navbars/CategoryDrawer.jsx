@@ -1,4 +1,5 @@
 import {
+  Button,
   Divider,
   List,
   ListItem,
@@ -7,13 +8,17 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import React from "react";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import clsx from "clsx";
+import WalmartIcon from "../elements/WalmartIcon";
+import TodayIcon from "@material-ui/icons/Today";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import PermIdentityIcon from "@material-ui/icons/PermIdentity";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   list: {
-    width: 250,
+    width: 300,
   },
 }));
 
@@ -22,24 +27,81 @@ export default function CategoryDrawer() {
 
   return (
     <div role="presentation" className={clsx(classes.list)}>
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+      <ListItem
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          margin: "5px 10px",
+          width: "100%",
+        }}
+      >
+        <WalmartIcon width="20px" /> <Button>X</Button>
+      </ListItem>
       <Divider />
+
+      <ListItem>
+        <b>Pickup & delivery</b>
+      </ListItem>
+
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
+        <ListItem button>
+          <ListItemIcon>
+            <TodayIcon />
+          </ListItemIcon>
+          See Items
+          <ListItemText />
+        </ListItem>
+
+        <ListItem button>
+          <ListItemIcon>
+            <FavoriteBorderIcon />
+          </ListItemIcon>
+          My Items
+          <ListItemText />
+        </ListItem>
+
+        <ListItem button component={Link} to="/login">
+          <ListItemIcon>
+            <PermIdentityIcon />
+          </ListItemIcon>
+          Sign In
+          <ListItemText />
+        </ListItem>
+        <Divider />
+      </List>
+
+      <List>
+        <b>Departments</b>
+        {[
+          "St. Patrick's Day",
+          "St. Patrick's Day",
+          "St. Patrick's Day",
+          "St. Patrick's Day",
+          "St. Patrick's Day",
+          "St. Patrick's Day",
+          "St. Patrick's Day",
+          "St. Patrick's Day",
+          "St. Patrick's Day",
+          "St. Patrick's Day",
+          "St. Patrick's Day",
+          "St. Patrick's Day",
+          "St. Patrick's Day",
+          "St. Patrick's Day",
+          "St. Patrick's Day",
+          "St. Patrick's Day",
+          "St. Patrick's Day",
+          "St. Patrick's Day",
+          "St. Patrick's Day",
+          "St. Patrick's Day",
+          "St. Patrick's Day",
+        ].map((department) => (
+          <ListItem button>
+            {department}
             <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              <ArrowForwardIosIcon />
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText />
           </ListItem>
         ))}
       </List>
