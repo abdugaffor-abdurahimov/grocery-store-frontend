@@ -73,64 +73,60 @@ const Login = () => {
       className="auth-grid"
     >
       {loading ? (
-        <>
-          <Progreses />
-        </>
+        <Progreses />
       ) : (
-        <>
-          <div>
-            <Typography variant="h5">Sign in to your account</Typography>
-            <form noValidate autoComplete="off">
-              <TextField
-                name="email"
-                value={inputData.email}
-                onChange={inputDataHondler}
-                label="Email"
-              />
-              <TextField
-                type="password"
-                name="password"
-                label="Create a password"
-                value={inputData.password}
-                onChange={inputDataHondler}
-              />
+        <div>
+          <Typography variant="h5">Sign in to your account</Typography>
+          <form noValidate autoComplete="off">
+            <TextField
+              name="email"
+              value={inputData.email}
+              onChange={inputDataHondler}
+              label="Email"
+            />
+            <TextField
+              type="password"
+              name="password"
+              label="Create a password"
+              value={inputData.password}
+              onChange={inputDataHondler}
+            />
 
-              <Link to="###" className="align-end">
-                Forgot password?
-              </Link>
+            <Link to="###" className="align-end">
+              Forgot password?
+            </Link>
 
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={inputData.keepSignedIn}
-                    onChange={inputDataHondler}
-                    name="keepSignedIn"
-                  />
-                }
-                label={<FormHelperText>Keep me signed in </FormHelperText>}
-                labelPlacement="end"
-              />
-              {error && <DangerAlert message={error} />}
-              <br />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={inputData.keepSignedIn}
+                  onChange={inputDataHondler}
+                  name="keepSignedIn"
+                />
+              }
+              label={<FormHelperText>Keep me signed in </FormHelperText>}
+              labelPlacement="end"
+            />
+            {error && <DangerAlert message={error} />}
+            <br />
 
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={handleSubmit}
-                disabled={disabled}
-              >
-                Sign in
-              </Button>
-            </form>
-
-            <Typography variant="body2" style={{ marginTop: "40px" }}>
-              Don't have an account?
-            </Typography>
-            <Button variant="outlined" component={Link} to="/register">
-              Create account
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={handleSubmit}
+              disabled={disabled}
+            >
+              Sign in
             </Button>
-          </div>
-        </>
+          </form>
+
+          <Typography variant="body2" style={{ marginTop: "40px" }}>
+            Don't have an account?
+          </Typography>
+          <Button variant="outlined" component={Link} to="/register">
+            Create account
+          </Button>
+        </div>
       )}
     </Grid>
   );
