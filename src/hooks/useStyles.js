@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => {
     toolBar: {
       display: "flex",
       alignItems: "center",
-      // justifyContent: "space-between",
     },
     searchBar: {
       boxSizing: "border-box",

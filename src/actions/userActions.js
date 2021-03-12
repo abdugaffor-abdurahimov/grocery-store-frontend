@@ -20,7 +20,7 @@ export function fetchUser() {
     dispatch(getUser());
 
     try {
-      const res = await fetchWithTokens.post("/api/users/me");
+      const res = await fetchWithTokens.get("/api/users/me");
 
       if (res.statusText === "OK") {
         dispatch(getUserSuccess(res.data));
