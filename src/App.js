@@ -5,6 +5,7 @@ import Home from "./pages/home";
 import DrawerCard from "./components/navbars/CartDrawer";
 import Appbar from "./components/navbars/Appbar";
 import useDocumentTitle from "./hooks/useDocumentTitle";
+import Details from "./pages/details";
 
 function App() {
   const location = useLocation();
@@ -16,8 +17,9 @@ function App() {
       <Route path="/login" exact component={Login} />
       <Route path="/register" exact component={Register} />
 
-      <main id="shoppingContent">
+      <main id="shoppingContent" style={{ marginTop: "80px" }}>
         <Route path="/" exact component={Home} />
+        <Route path="/details/:id" component={Details} />
       </main>
 
       {location.pathname === "/login" || location.pathname === "/register" || (
