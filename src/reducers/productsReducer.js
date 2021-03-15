@@ -4,6 +4,7 @@ const initialState = {
   data: [],
   loading: false,
   error: null,
+  currentProduct: {},
 };
 
 export default function productsReducer(state = initialState, action) {
@@ -20,6 +21,9 @@ export default function productsReducer(state = initialState, action) {
         error: action.payload,
         loading: false,
       };
+
+    case c.SET_CURRENT_PRODUCT:
+      return { ...state, currentProduct: action.payload };
 
     default:
       return state;

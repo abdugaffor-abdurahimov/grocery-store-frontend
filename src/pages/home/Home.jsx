@@ -20,8 +20,10 @@ const Home = () => {
   useAuth();
 
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
+    if (data.length < 1) {
+      dispatch(fetchProducts());
+    }
+  }, [dispatch, data.length]);
   return (
     <div>
       {data &&

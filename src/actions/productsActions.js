@@ -15,6 +15,11 @@ export const getProductsFailure = (error) => ({
   payload: error,
 });
 
+export const setCurrentProduct = (product) => ({
+  type: c.SET_CURRENT_PRODUCT,
+  payload: product,
+});
+
 export function fetchProducts() {
   return async (dispatch) => {
     dispatch(getProducts());

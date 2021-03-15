@@ -7,6 +7,9 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { useHistory } from "react-router";
+import { setCurrentProduct } from "../../actions/productsActions";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
   root: {
@@ -16,6 +19,8 @@ const useStyles = makeStyles({
 
 export default function SingleProduct({ product }) {
   const classes = useStyles();
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   return (
     <Card className={classes.root}>
@@ -38,9 +43,16 @@ export default function SingleProduct({ product }) {
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary">
-          Share
+          Add Cart
         </Button>
-        <Button size="small" color="primary">
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => {
+            dispatch(setCurrentProduct(product));
+            history.push(`/details/${product._id}`);
+          }}
+        >
           Learn More
         </Button>
       </CardActions>
