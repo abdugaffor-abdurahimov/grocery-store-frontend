@@ -12,6 +12,7 @@ import TextField from "../../../components/elements/TextField";
 import fetchDefault from "../../../clients";
 import Progreses from "../../../components/elements/Progreses";
 import { DangerAlert } from "../../../components/elements/Alerts";
+import WalmartIcon from "../../../components/elements/WalmartIcon";
 
 const Login = () => {
   const [inputData, setInputData] = useState({
@@ -76,7 +77,12 @@ const Login = () => {
         <Progreses />
       ) : (
         <div>
-          <Typography variant="h5">Sign in to your account</Typography>
+          <WalmartIcon />
+          <br />
+          <br />
+          <br />
+          <Typography variant="h5">Sign in to your </Typography>
+          <Typography variant="h5">Walmart account</Typography>
           <form noValidate autoComplete="off">
             <TextField
               name="email"
