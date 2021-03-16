@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { useHistory } from "react-router";
 import { setCurrentProduct } from "../../actions/productsActions";
 import { useDispatch } from "react-redux";
+import { addProductToCart } from "../../actions/cartActions";
 
 const useStyles = makeStyles({
   root: {
@@ -21,6 +22,10 @@ export default function SingleProduct({ product }) {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const handleAddProduct = (product) => {
+    dispatch(addProductToCart(product));
+  };
 
   return (
     <Card className={classes.root}>
@@ -42,7 +47,13 @@ export default function SingleProduct({ product }) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => {
+            handleAddProduct(product);
+          }}
+        >
           Add Cart
         </Button>
         <Button
