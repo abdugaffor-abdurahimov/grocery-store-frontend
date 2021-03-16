@@ -3,14 +3,13 @@ import {
   Drawer,
   List,
   ListItem,
-  ListItemIcon,
-  ListItemText,
   makeStyles,
+  Typography,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import { useSelector } from "react-redux";
 import useWindowWidth from "../../hooks/useWindowWidth";
+import SingleCart from "../elements/SingleCart";
 
 const drawerWidth = 320;
 
@@ -22,12 +21,22 @@ const useStyles = makeStyles(() => ({
   drawerPaper: {
     width: drawerWidth,
   },
+  drawerContainer: {
+    overflow: "auto",
+    marginTop: "80px",
+  },
+  cartHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    margin: "0 10px",
+  },
 }));
 
 export default function CartDrawer() {
   const classes = useStyles();
   const width = useWindowWidth();
   const [show, setShow] = useState(false);
+  const { basket } = useSelector((state) => state.cart);
 
   useEffect(() => {
     if (width > 1000) {
@@ -46,27 +55,20 @@ export default function CartDrawer() {
       }}
       anchor="right"
     >
-      <div className={classes.toolbar} />
+      <div className={classes.drawerContainer} />
+      <Typography variant="body1" className={classes.cartHeader}>
+        <b>Cart</b>
+        <b>Items</b>
+      </Typography>
       <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
+        {Object.keys(basket).map((key) => (
+          <>
+            <ListItem>
+              <SingleCart {...basket[key]} />
+            </ListItem>
+            <Divider />
+          </>
         ))}
       </List>
     </Drawer>
