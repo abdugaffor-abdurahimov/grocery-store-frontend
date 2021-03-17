@@ -14,7 +14,7 @@ import { addProductToCart } from "../../actions/cartActions";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 200,
   },
 });
 
@@ -28,7 +28,13 @@ export default function SingleProduct({ product }) {
   };
 
   return (
-    <Card className={classes.root}>
+    <Card
+      className={classes.root}
+      onClick={() => {
+        dispatch(setCurrentProduct(product));
+        history.push(`/details/${product._id}`);
+      }}
+    >
       <CardActionArea>
         <CardMedia
           component="img"
@@ -55,16 +61,6 @@ export default function SingleProduct({ product }) {
           }}
         >
           Add Cart
-        </Button>
-        <Button
-          size="small"
-          color="primary"
-          onClick={() => {
-            dispatch(setCurrentProduct(product));
-            history.push(`/details/${product._id}`);
-          }}
-        >
-          Learn More
         </Button>
       </CardActions>
     </Card>
