@@ -17,7 +17,7 @@ function App() {
       <Route path="/login" exact component={Login} />
       <Route path="/register" exact component={Register} />
 
-      <main id="shoppingContent" style={{ marginTop: "80px" }}>
+      <main id="shoppingContent" style={{ margin: "80px 20px" }}>
         <Route path="/" exact component={Home} />
         <Route path="/details/:id" component={Details} />
       </main>
