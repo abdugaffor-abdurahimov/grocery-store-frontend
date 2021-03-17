@@ -63,12 +63,9 @@ export default function CartDrawer() {
       <Divider />
       <List>
         {Object.keys(basket).map((key) => (
-          <>
-            <ListItem>
-              <SingleCart {...basket[key]} />
-            </ListItem>
-            <Divider />
-          </>
+          <ListItem key={key}>
+            <SingleCart {...basket[key]} key={key} />
+          </ListItem>
         ))}
       </List>
     </Drawer>
