@@ -1,8 +1,11 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { addProductToCart } from "../../actions/cartActions";
+import {
+  // addProductToCart,
+  sendAddProductToCart,
+} from "../../actions/cartActions";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Typography } from "@material-ui/core";
 import { setCurrentProduct } from "../../actions/productsActions";
 import { useHistory } from "react-router";
@@ -31,24 +34,32 @@ export default function SingleProduct({ product }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+  const { userInfos } = useSelector((state) => state.user);
 
   return (
-    <div
-      className={classes.root}
-      onClick={() => {
-        dispatch(setCurrentProduct(product));
-        history.push(`/details/${product._id}`);
-      }}
-    >
-      <FavoriteBorderIcon className={classes.heart} />
-      <img src={product.images[0]} alt="product" className={classes.img} />
-      <div>
-        <b>Price {product.price}$</b>
-        <Typography>{product.name}</Typography>
+    <div className={classes.root}>
+      <div
+        onClick={() => {
+          dispatch(setCurrentProduct(product));
+          history.push(`/details/${product._id}`);
+        }}
+      >
+        <FavoriteBorderIcon className={classes.heart} />
+        <img src={product.images[0]} alt="product" className={classes.img} />
+        <div>
+          <b>Price {product.price}$</b>
+          <Typography>{product.name}</Typography>
+        </div>
       </div>
 
       <button
-        onClick={() => dispatch(addProductToCart(product))}
+        onClick={() => {
+          if (userInfos._id) {
+            dispatch(sendAddProductToCart(product, userInfos._id));
+          } else {
+            history.push("/login");
+          }
+        }}
         className={classes.button}
       >
         <b> Add to cart</b>

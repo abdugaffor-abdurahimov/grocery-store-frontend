@@ -17,11 +17,23 @@ export default function cartReducer(state = initialState, action) {
     //     basket: state.basket.filter((item) => item.id !== action.payload),
     //   };
 
-    // case c.UPDATE_PRODUCT_AMOUNT:
-    //   return {
-    //     ...state,
-    //     basket: [state.basket.map({id, amout})=> id === action.payload.id6],
-    //   };
+    case c.UPDATE_PRODUCT_AMOUNT:
+      return {
+        ...state,
+        basket: {
+          ...state.basket,
+          [action.payload.id]: {
+            ...state.basket[action.payload.id],
+            amount: action.payload.amount,
+          },
+        },
+      };
+
+    case c.POST_PRODUCT_TO_CART_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+      };
 
     default:
       return state;

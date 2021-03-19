@@ -22,6 +22,7 @@ const useStyles = makeStyles(() => ({
     width: drawerWidth,
   },
   drawerContainer: {
+    width: drawerWidth,
     overflow: "auto",
     marginTop: "80px",
   },
@@ -32,7 +33,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function CartDrawer() {
+export default function CartDrawer(props) {
   const classes = useStyles();
   const width = useWindowWidth();
   const [show, setShow] = useState(false);
@@ -47,14 +48,7 @@ export default function CartDrawer() {
   }, [width]);
 
   return show ? (
-    <Drawer
-      className={classes.drawer}
-      variant="permanent"
-      classes={{
-        paper: classes.drawerPaper,
-      }}
-      anchor="right"
-    >
+    <Drawer variant="persistent" open={props.cartOpen} anchor="right">
       <div className={classes.drawerContainer} />
       <Typography variant="body1" className={classes.cartHeader}>
         <b>Cart</b>
@@ -64,7 +58,7 @@ export default function CartDrawer() {
       <List>
         {Object.keys(basket).map((key) => (
           <ListItem key={key}>
-            <SingleCart {...basket[key]} key={key} />
+            <SingleCart {...basket[key]} id={Object.keys(basket)[0]} />
           </ListItem>
         ))}
       </List>

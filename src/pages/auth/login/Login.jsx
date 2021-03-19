@@ -37,8 +37,9 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
     setLoading(true);
+    e.preventDefault();
+    console.log(loading);
 
     const user = {
       email: inputData.email,
@@ -48,15 +49,21 @@ const Login = () => {
     fetchDefault
       .post("/api/users/login", user)
       .then((res) => {
-        if ((res.statusText = "ok")) {
+        if ((res.statusText = "OK")) {
           localStorage.setItem("accessToken", res.data.accessToken);
           localStorage.setItem("refreshToken", res.data.refreshToken);
-          setLoading(false);
-          history.push("/");
+          setTimeout(() => {
+            setLoading(false);
+            history.push("/");
+          }, 2000);
+        } else {
+          setError("Email or password not valid");
         }
       })
-      .catch((err) => setError("Email or password not valid"))
-      .finally(setLoading(false));
+      .catch((err) => {
+        setError("Email or password not valid");
+        setLoading(false);
+      });
   };
 
   useEffect(() => {

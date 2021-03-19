@@ -11,7 +11,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import useStyles from "../../hooks/useStyles";
 import { useSelector } from "react-redux";
 
-export default function Appbar() {
+export default function Appbar(props) {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const toggleDrawer = () => setDrawerOpen(!drawerOpen);
@@ -51,7 +51,7 @@ export default function Appbar() {
         </div>
         <PermIdentityIcon />
         {userInfos._id ? `Hi, ${userInfos.firstname}` : <>Account</>}
-        <IconButton aria-label="cart">
+        <IconButton onClick={props.toggleCart} aria-label="cart">
           <StyledBadge badgeContent={4} color="secondary">
             <ShoppingCartIcon />
           </StyledBadge>

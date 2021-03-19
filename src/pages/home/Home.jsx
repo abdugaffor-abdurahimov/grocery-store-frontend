@@ -4,7 +4,7 @@ import { fetchProducts } from "../../actions/productsActions";
 import { useDispatch, useSelector } from "react-redux";
 import useAuth from "../../hooks/useAuth";
 import DefaultCaraucel from "../../components/caraucels/DefaultCaraucel";
-import { Divider } from "@material-ui/core";
+import { Divider, Container } from "@material-ui/core";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -17,10 +17,10 @@ const Home = () => {
     }
   }, [dispatch, data.length]);
   return (
-    <div>
+    <Container maxWidth="xl">
       <DefaultCaraucel data={data} />
       <Divider />
-    </div>
+    </Container>
   );
 };
 
