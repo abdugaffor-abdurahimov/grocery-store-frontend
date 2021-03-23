@@ -16,6 +16,7 @@ export default function Appbar(props) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const toggleDrawer = () => setDrawerOpen(!drawerOpen);
   const { userInfos } = useSelector((state) => state.user);
+  const { basket } = useSelector((state) => state.cart);
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -32,7 +33,7 @@ export default function Appbar(props) {
           </IconButton>
 
           <Drawer open={drawerOpen} onClose={toggleDrawer}>
-            {CategoryDrawer()}
+            <CategoryDrawer toggleDrawer={toggleDrawer} />
           </Drawer>
           <Link to="/">Home</Link>
         </div>
@@ -52,7 +53,10 @@ export default function Appbar(props) {
         <PermIdentityIcon />
         {userInfos._id ? `Hi, ${userInfos.firstname}` : <>Account</>}
         <IconButton onClick={props.toggleCart} aria-label="cart">
-          <StyledBadge badgeContent={4} color="secondary">
+          <StyledBadge
+            badgeContent={Object.keys(basket).length}
+            color="secondary"
+          >
             <ShoppingCartIcon />
           </StyledBadge>
         </IconButton>

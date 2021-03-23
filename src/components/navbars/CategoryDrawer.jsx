@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function CategoryDrawer() {
+export default function CategoryDrawer(props) {
   const classes = useStyles();
   const { userInfos } = useSelector((state) => state.user);
 
@@ -40,7 +40,10 @@ export default function CategoryDrawer() {
           backgroundColor: "#041e42",
         }}
       >
-        <WalmartIcon width="20px" /> <Button color="secondary">X</Button>
+        <WalmartIcon width="20px" />{" "}
+        <Button color="secondary" onClick={props.toggleDrawer}>
+          X
+        </Button>
       </ListItem>
       {userInfos._id ? SignedIn() : NotSignedIn()}
       <Departments />
@@ -147,8 +150,8 @@ const Departments = () => (
       "St. Patrick's Day",
       "St. Patrick's Day",
       "St. Patrick's Day",
-    ].map((department) => (
-      <ListItem button>
+    ].map((department, idx) => (
+      <ListItem button key={idx}>
         <ListItemIcon>
           <ArrowForwardIosIcon />
         </ListItemIcon>

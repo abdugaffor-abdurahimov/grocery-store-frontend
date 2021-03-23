@@ -39,8 +39,8 @@ export function sendAddProductToCart(product, userId, amount = 1) {
     fetchWithTokens
       .post("/api/cart", {
         quantity: 1,
-        productId: "604ef7a91d55c52107d8be8c",
-        userId: "6054935581a5ce99728c7732",
+        productId: product.id,
+        userId: userId,
       })
       .then((response) => {
         console.log(response);

@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import {
   Button,
   Checkbox,
+  CircularProgress,
   FormControlLabel,
   FormHelperText,
   Grid,
@@ -10,9 +11,9 @@ import {
 } from "@material-ui/core";
 import TextField from "../../../components/elements/TextField";
 import fetchDefault from "../../../clients";
-import Progreses from "../../../components/elements/Progreses";
 import { DangerAlert } from "../../../components/elements/Alerts";
 import WalmartIcon from "../../../components/elements/WalmartIcon";
+import useLoading from "../../../hooks/useLoading";
 
 const Login = () => {
   const [inputData, setInputData] = useState({
@@ -25,7 +26,7 @@ const Login = () => {
 
   const history = useHistory();
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useLoading();
   const [error, setError] = useState(null);
 
   const inputDataHondler = (e) => {
@@ -38,8 +39,11 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     setLoading(true);
+
     e.preventDefault();
     console.log(loading);
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
 
     const user = {
       email: inputData.email,
@@ -52,10 +56,7 @@ const Login = () => {
         if ((res.statusText = "OK")) {
           localStorage.setItem("accessToken", res.data.accessToken);
           localStorage.setItem("refreshToken", res.data.refreshToken);
-          setTimeout(() => {
-            setLoading(false);
-            history.push("/");
-          }, 2000);
+          history.push("/");
         } else {
           setError("Email or password not valid");
         }
@@ -81,7 +82,7 @@ const Login = () => {
       className="auth-grid"
     >
       {loading ? (
-        <Progreses />
+        <CircularProgress />
       ) : (
         <div>
           <WalmartIcon />

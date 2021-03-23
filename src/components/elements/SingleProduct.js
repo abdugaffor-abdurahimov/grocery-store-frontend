@@ -1,69 +1,70 @@
+import { sendAddProductToCart } from "../../actions/cartActions";
+import { setCurrentProduct } from "../../actions/productsActions";
+
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  // addProductToCart,
-  sendAddProductToCart,
-} from "../../actions/cartActions";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import { useDispatch, useSelector } from "react-redux";
-import { Typography } from "@material-ui/core";
-import { setCurrentProduct } from "../../actions/productsActions";
 import { useHistory } from "react-router";
 
 const useStyles = makeStyles({
-  root: { cursor: "pointer" },
-  img: {
-    width: "150px",
+  root: {
+    maxWidth: 345,
   },
-
-  heart: {
-    cursor: "pointer",
-  },
-  button: {
-    backgroundColor: "#0065ff",
-    borderRadius: "20px",
-    cursor: "pointer",
-    padding: "8px 10px",
-    border: "none",
-    color: "white",
-    textAlign: "start",
+  media: {
+    height: 140,
   },
 });
 
-export default function SingleProduct({ product }) {
+export default function MediaCard({ product }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
   const { userInfos } = useSelector((state) => state.user);
 
   return (
-    <div className={classes.root}>
-      <div
+    <Card className={classes.root}>
+      <CardActionArea
         onClick={() => {
           dispatch(setCurrentProduct(product));
           history.push(`/details/${product._id}`);
         }}
       >
-        <FavoriteBorderIcon className={classes.heart} />
-        <img src={product.images[0]} alt="product" className={classes.img} />
-        <div>
-          <b>Price {product.price}$</b>
-          <Typography>{product.name}</Typography>
-        </div>
-      </div>
-
-      <button
-        onClick={() => {
-          if (userInfos._id) {
-            dispatch(sendAddProductToCart(product, userInfos._id));
-          } else {
-            history.push("/login");
-          }
-        }}
-        className={classes.button}
-      >
-        <b> Add to cart</b>
-      </button>
-    </div>
+        <CardMedia
+          className={classes.media}
+          image={product.images[0]}
+          title="Contemplative Reptile"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            {product.name}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {product.description.slice(0, 100)}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => {
+            if (userInfos._id) {
+              dispatch(sendAddProductToCart(product, userInfos._id));
+            } else {
+              history.push("/login");
+            }
+          }}
+        >
+          Add Cart
+        </Button>
+      </CardActions>
+    </Card>
   );
 }

@@ -19,11 +19,10 @@ function App() {
       <Route path="/login" exact component={Login} />
       <Route path="/register" exact component={Register} />
 
-      {/* <main id="shoppingContent" style={{ margin: "80px 20px" }}>
-       
-      </main> */}
-      <Route path="/" exact component={Home} />
-      <Route path="/details/:id" component={Details} />
+      <main id="shoppingContent">
+        <Route path="/" exact component={Home} />
+        <Route path="/details/:id" component={Details} />
+      </main>
 
       {location.pathname === "/login" || location.pathname === "/register" || (
         <>

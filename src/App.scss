@@ -1,6 +1,5 @@
 .App {
   text-align: start;
-  display: flex;
 
   .MuiAlert-icon {
     width: 12px;
@@ -47,4 +46,8 @@
 
 .slick-slide.slick-active {
   width: 280px !important;
+}
+
+#shoppingContent {
+  margin-top: 80px;
 }

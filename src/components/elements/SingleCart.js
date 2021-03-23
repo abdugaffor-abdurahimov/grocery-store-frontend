@@ -1,60 +1,57 @@
-import { makeStyles, Typography } from "@material-ui/core";
 import React from "react";
-import { useDispatch } from "react-redux";
-import { updateProductAmount } from "../../actions/cartActions";
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Typography from "@material-ui/core/Typography";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    width: "200px",
-    margin: "5px 0",
-  },
-  cartBody: {
     display: "flex",
+    width: "100%",
   },
-  inputWrapper: { display: "flex" },
+  details: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  content: {
+    flex: "1 0 auto",
+  },
+  cover: {
+    width: 151,
+  },
+  controls: {
+    display: "flex",
+    alignItems: "center",
+    paddingLeft: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
+  },
+  playIcon: {
+    height: 38,
+    width: 38,
+  },
+}));
 
-  input: { width: "50px", borderRadius: "10px", border: "1px solid black" },
-  img: { width: "50px" },
-});
-
-export default function SingleCart(props) {
+export default function MediaControlCard(props) {
   const classes = useStyles();
-  const dispatch = useDispatch();
-
-  const handleUpdateAmount = (event) => {
-    const value = event.target.value.replace(/\+|-/gi, "");
-    console.log(value);
-
-    if (value.length) {
-      const amount = parseInt(value);
-      dispatch(updateProductAmount(props.id, amount));
-    } else {
-    }
-  };
 
   return (
-    <div className={classes.root}>
-      <img
-        src={props.img}
-        alt={props.name}
-        align="left"
-        className={classes.img}
-      />
-      <div className={classes.cartBody}>
-        <Typography variant="body2">{props.name}</Typography>
-        <div className={classes.inputWrapper}>
-          <input
-            value={props.amount}
-            className={classes.input}
-            type="number"
-            onChange={(e) => {
-              console.log(props);
-              handleUpdateAmount(e);
-            }}
-          />
-          <b>Price: {props.price} $</b>
-        </div>
+    <Card className={classes.root}>
+      <div className={classes.details}>
+        <CardContent className={classes.content}>
+          <Typography component="h5" variant="h5">
+            {props.name.slice(0, 10)}
+          </Typography>
+          <Typography variant="subtitle1" color="textSecondary">
+            Price: {props.price} $
+          </Typography>
+        </CardContent>
       </div>
-    </div>
+      <CardMedia
+        className={classes.cover}
+        image={props.img}
+        title="Live from space album cover"
+      />
+    </Card>
   );
 }

@@ -7,9 +7,15 @@ const useAuth = () => {
   const { userInfos, loading, error } = useSelector((state) => state.user);
 
   useEffect(() => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+
     if (!userInfos._id) {
-      dispatch(fetchUser());
+      dispatch(fetchUser(signal));
     }
+    return function cleanup() {
+      abortController.abort();
+    };
   }, [dispatch, userInfos._id]);
 
   return { userInfos, loading, error };
