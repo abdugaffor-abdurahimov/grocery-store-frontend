@@ -1,4 +1,5 @@
 import {
+  Button,
   Divider,
   Drawer,
   List,
@@ -31,6 +32,13 @@ const useStyles = makeStyles(() => ({
     justifyContent: "space-between",
     margin: "0 10px",
   },
+  order: {
+    position: "absolute",
+    bottom: "5px",
+    right: 0,
+    left: 0,
+    textAlign: "center",
+  },
 }));
 
 export default function CartDrawer(props) {
@@ -62,6 +70,14 @@ export default function CartDrawer(props) {
           </ListItem>
         ))}
       </List>
+
+      {/* ss */}
+      <div className={classes.order}>
+        <h4>Subtotal: {}</h4>
+        <Button variant="contained" color="secondary">
+          Checkout
+        </Button>
+      </div>
     </Drawer>
   ) : (
     <></>

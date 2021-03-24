@@ -13,7 +13,6 @@ import TextField from "../../../components/elements/TextField";
 import fetchDefault from "../../../clients";
 import { DangerAlert } from "../../../components/elements/Alerts";
 import WalmartIcon from "../../../components/elements/WalmartIcon";
-import useLoading from "../../../hooks/useLoading";
 
 const Login = () => {
   const [inputData, setInputData] = useState({
@@ -22,11 +21,11 @@ const Login = () => {
     keepSignedIn: false,
   });
 
-  const [disabled, setDisabled] = useState(true);
+  const [disabled, setDisabled] = useState(false);
 
   const history = useHistory();
 
-  const [loading, setLoading] = useLoading();
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const inputDataHondler = (e) => {
@@ -38,12 +37,8 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-    setLoading(true);
-
     e.preventDefault();
-    console.log(loading);
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
+    setLoading(true);
 
     const user = {
       email: inputData.email,
@@ -56,14 +51,17 @@ const Login = () => {
         if ((res.statusText = "OK")) {
           localStorage.setItem("accessToken", res.data.accessToken);
           localStorage.setItem("refreshToken", res.data.refreshToken);
-          history.push("/");
+
+          setTimeout(() => {
+            setLoading(false);
+            history.push("/");
+          }, 3000);
         } else {
           setError("Email or password not valid");
         }
       })
       .catch((err) => {
         setError("Email or password not valid");
-        setLoading(false);
       });
   };
 

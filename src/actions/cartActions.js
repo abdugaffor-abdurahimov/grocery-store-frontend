@@ -32,15 +32,27 @@ export const updateProductAmount = (id, amount = 1) => ({
   payload: { id, amount },
 });
 
+export const getAllCats = () => ({
+  type: c.GET_ALL_CATS,
+});
+
+export const getAllCatsSuccess = () => ({
+  type: c.GET_ALL_CATS_SUCCESS,
+});
+
+export const getAllCatsFailure = () => ({
+  type: c.GET_ALL_CATS_FAILURE,
+});
+
 export function sendAddProductToCart(product, userId, amount = 1) {
   return async (dispatch) => {
     dispatch(addProductToCart(product, amount));
 
     fetchWithTokens
       .post("/api/cart", {
-        quantity: 1,
-        productId: product.id,
+        amount: 1,
         userId: userId,
+        productId: product._id,
       })
       .then((response) => {
         console.log(response);

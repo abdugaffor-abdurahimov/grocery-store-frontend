@@ -35,6 +35,11 @@ export default function cartReducer(state = initialState, action) {
         error: action.payload,
       };
 
+    case c.GET_ALL_CATS_SUCCESS:
+      return {
+        ...state,
+      };
+
     default:
       return state;
   }
