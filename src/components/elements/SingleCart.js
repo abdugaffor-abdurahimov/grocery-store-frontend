@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MediaControlCard(props) {
+export default function MediaControlCard({ product, amount }) {
   const classes = useStyles();
 
   return (
@@ -40,18 +40,19 @@ export default function MediaControlCard(props) {
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography component="h5" variant="h5">
-            {props.name.slice(0, 10)}
+            {product.name.slice(0, 10)}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            Price: {props.price} $
+            Price: {product.price} $
           </Typography>
         </CardContent>
       </div>
       <CardMedia
         className={classes.cover}
-        image={props.img}
+        image={product.images[0]}
         title="Live from space album cover"
       />
+      <small>{amount}</small>
     </Card>
   );
 }

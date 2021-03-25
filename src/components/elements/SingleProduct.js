@@ -56,7 +56,7 @@ export default function MediaCard({ product }) {
           color="primary"
           onClick={() => {
             if (userInfos._id) {
-              dispatch(sendAddProductToCart(product, userInfos._id));
+              dispatch(sendAddProductToCart(product._id, userInfos._id));
             } else {
               history.push("/login");
             }

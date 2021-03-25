@@ -16,7 +16,6 @@ export default function Appbar(props) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const toggleDrawer = () => setDrawerOpen(!drawerOpen);
   const { userInfos } = useSelector((state) => state.user);
-  const { basket } = useSelector((state) => state.cart);
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -53,10 +52,7 @@ export default function Appbar(props) {
         <PermIdentityIcon />
         {userInfos._id ? `Hi, ${userInfos.firstname}` : <>Account</>}
         <IconButton onClick={props.toggleCart} aria-label="cart">
-          <StyledBadge
-            badgeContent={Object.keys(basket).length}
-            color="secondary"
-          >
+          <StyledBadge badgeContent={1} color="secondary">
             <ShoppingCartIcon />
           </StyledBadge>
         </IconButton>

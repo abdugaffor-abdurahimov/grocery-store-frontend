@@ -1,15 +1,11 @@
 import { fetchWithTokens } from "../clients";
 import { cart_action_types as c } from "./constants";
 
-export const addProductToCart = (product, amount = 1) => ({
+export const addProductToCart = (productId, amount = 1) => ({
   type: c.ADD_PRODUCT_TO_CART,
   payload: {
-    [product._id]: {
-      amount,
-      img: product.images[0],
-      name: product.name,
-      price: product.price,
-    },
+    amount,
+    productId,
   },
 });
 
@@ -18,8 +14,9 @@ const postAddProductFailure = (err) => ({
   payload: err,
 });
 
-const postAddProductSuccess = () => ({
+const postAddProductSuccess = (data) => ({
   type: c.POST_PRODUCT_TO_CART_SUCCESS,
+  payload: data,
 });
 
 export const removeProductFromCart = (id) => ({
@@ -32,31 +29,32 @@ export const updateProductAmount = (id, amount = 1) => ({
   payload: { id, amount },
 });
 
-export const getAllCats = () => ({
-  type: c.GET_ALL_CATS,
+export const getAllCarts = () => ({
+  type: c.GET_ALL_CATRS,
 });
 
-export const getAllCatsSuccess = () => ({
-  type: c.GET_ALL_CATS_SUCCESS,
+export const getAllCartsSuccess = () => ({
+  type: c.GET_ALL_CATRS_SUCCESS,
 });
 
-export const getAllCatsFailure = () => ({
-  type: c.GET_ALL_CATS_FAILURE,
+export const getAllCartsFailure = () => ({
+  type: c.GET_ALL_CATRS_FAILURE,
 });
 
-export function sendAddProductToCart(product, userId, amount = 1) {
+export function sendAddProductToCart(productId, userId, amount = 1) {
   return async (dispatch) => {
-    dispatch(addProductToCart(product, amount));
+    dispatch(addProductToCart(productId, amount));
 
     fetchWithTokens
-      .post("/api/cart", {
+      .post(`/api/users/${userId}/addToCart`, {
         amount: 1,
-        userId: userId,
-        productId: product._id,
+        product: productId,
       })
       .then((response) => {
         console.log(response);
-        if (response.statusText === "OK") dispatch(postAddProductSuccess());
+        if (response.statusText === "OK") {
+          dispatch(postAddProductSuccess(response.data));
+        }
       })
       .catch((err) => {
         dispatch(postAddProductFailure(err.message));

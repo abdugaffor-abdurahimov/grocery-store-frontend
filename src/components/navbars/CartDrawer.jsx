@@ -45,7 +45,8 @@ export default function CartDrawer(props) {
   const classes = useStyles();
   const width = useWindowWidth();
   const [show, setShow] = useState(false);
-  const { basket } = useSelector((state) => state.cart);
+  const { cart } = useSelector((state) => state.user.userInfos);
+  console.log("cart", cart);
 
   useEffect(() => {
     if (width > 1000) {
@@ -64,11 +65,12 @@ export default function CartDrawer(props) {
       </Typography>
       <Divider />
       <List>
-        {Object.keys(basket).map((key) => (
-          <ListItem key={key}>
-            <SingleCart {...basket[key]} id={Object.keys(basket)[0]} />
-          </ListItem>
-        ))}
+        {cart &&
+          cart.map((product, key) => (
+            <ListItem key={key}>
+              <SingleCart {...product} />
+            </ListItem>
+          ))}
       </List>
 
       {/* ss */}
