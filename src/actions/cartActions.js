@@ -52,7 +52,7 @@ export function sendAddProductToCart(productId, userId, amount = 1) {
       })
       .then((response) => {
         if (response.statusText === "Created") {
-          dispatch(postAddProductSuccess(response.data));
+          dispatch(postAddProductSuccess(response.data.reverse()));
         }
       })
       .catch((err) => {
