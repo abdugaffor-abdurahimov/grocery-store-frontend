@@ -7,9 +7,8 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import useWindowWidth from "../../hooks/useWindowWidth";
 import SingleCart from "../elements/SingleCart";
 
 const drawerWidth = 320;
@@ -43,20 +42,10 @@ const useStyles = makeStyles(() => ({
 
 export default function CartDrawer(props) {
   const classes = useStyles();
-  const width = useWindowWidth();
-  const [show, setShow] = useState(false);
+
   const { cart } = useSelector((state) => state.user.userInfos);
-  console.log("cart", cart);
 
-  useEffect(() => {
-    if (width > 1000) {
-      setShow(true);
-    } else {
-      setShow(false);
-    }
-  }, [width]);
-
-  return show ? (
+  return (
     <Drawer variant="persistent" open={props.cartOpen} anchor="right">
       <div className={classes.drawerContainer} />
       <Typography variant="body1" className={classes.cartHeader}>
@@ -81,7 +70,5 @@ export default function CartDrawer(props) {
         </Button>
       </div>
     </Drawer>
-  ) : (
-    <></>
   );
 }

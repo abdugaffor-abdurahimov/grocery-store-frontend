@@ -52,7 +52,7 @@ export default function Appbar(props) {
         <PermIdentityIcon />
         {userInfos._id ? `Hi, ${userInfos.firstname}` : <>Account</>}
         <IconButton onClick={props.toggleCart} aria-label="cart">
-          <StyledBadge badgeContent={1} color="secondary">
+          <StyledBadge badgeContent={userInfos.cart.length} color="secondary">
             <ShoppingCartIcon />
           </StyledBadge>
         </IconButton>

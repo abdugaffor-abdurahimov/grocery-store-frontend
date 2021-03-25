@@ -51,8 +51,7 @@ export function sendAddProductToCart(productId, userId, amount = 1) {
         product: productId,
       })
       .then((response) => {
-        console.log(response);
-        if (response.statusText === "OK") {
+        if (response.statusText === "Created") {
           dispatch(postAddProductSuccess(response.data));
         }
       })
