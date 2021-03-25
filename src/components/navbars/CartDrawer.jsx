@@ -32,11 +32,12 @@ const useStyles = makeStyles(() => ({
     margin: "0 10px",
   },
   order: {
-    position: "absolute",
-    bottom: "5px",
-    right: 0,
-    left: 0,
+    position: "fixed",
+    bottom: 0,
+    right: 25,
     textAlign: "center",
+    backgroundColor: "white",
+    width: drawerWidth,
   },
 }));
 
