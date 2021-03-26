@@ -5,6 +5,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 
+import ProductChangeInput from "./ProductChangeInput";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -32,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MediaControlCard({ product, amount }) {
+export default function MediaControlCard(props) {
   const classes = useStyles();
 
   return (
@@ -40,19 +42,19 @@ export default function MediaControlCard({ product, amount }) {
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography component="h5" variant="h5">
-            {product.name.slice(0, 10)}
+            {props.product.name.slice(0, 10)}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            Price: {product.price} $
+            Price: {props.product.price} $
           </Typography>
+          <ProductChangeInput value={props.amount} />
         </CardContent>
       </div>
       <CardMedia
         className={classes.cover}
-        image={product.images[0]}
+        image={props.product.images[0]}
         title="Live from space album cover"
       />
-      <small>{amount}</small>
     </Card>
   );
 }
