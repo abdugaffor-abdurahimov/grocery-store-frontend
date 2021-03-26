@@ -12,6 +12,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import ProductChangeInput from "./ProductChangeInput";
 
 const useStyles = makeStyles({
   root: {
@@ -64,6 +65,8 @@ export default function MediaCard({ product }) {
         >
           Add Cart
         </Button>
+
+        {userInfos.cart && <ProductChangeInput />}
       </CardActions>
     </Card>
   );

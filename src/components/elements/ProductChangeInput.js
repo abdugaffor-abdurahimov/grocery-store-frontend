@@ -5,18 +5,16 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 
 const useStyles = makeStyles(() => ({
+  root: { display: "flex" },
   input: {
     width: "50px",
-    left: "40px",
     borderRadius: "10px",
     border: "0.5px solid darkgray",
-    position: "absolute",
     height: "20px",
   },
   add: {
     position: "relative",
     backgroundColor: "#00ff84",
-    right: "-40px",
     borderRadius: "50%",
     cursor: "pointer",
   },
@@ -25,7 +23,6 @@ const useStyles = makeStyles(() => ({
     backgroundColor: "#00ff84",
     borderRadius: "50%",
     cursor: "pointer",
-    left: "-15px",
   },
 }));
 
@@ -43,7 +40,11 @@ export default function ProductChangeInput({ onChange, value }) {
   };
 
   return (
-    <Typography variant="subtitle1" color="textSecondary">
+    <Typography
+      variant="subtitle1"
+      color="textSecondary"
+      className={classes.root}
+    >
       <RemoveIcon className={classes.remove} />
 
       <input
