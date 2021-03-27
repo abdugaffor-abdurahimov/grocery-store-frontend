@@ -6,6 +6,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 
 import ProductChangeInput from "./ProductChangeInput";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MediaControlCard(props) {
   const classes = useStyles();
-
+  const { userInfos } = useSelector((state) => state.user);
   return (
     <Card className={classes.root}>
       <div className={classes.details}>
@@ -47,7 +48,11 @@ export default function MediaControlCard(props) {
           <Typography variant="subtitle1" color="textSecondary">
             Price: {props.product.price} $
           </Typography>
-          <ProductChangeInput value={props.amount} />
+          <ProductChangeInput
+            value={props.amount}
+            userId={userInfos._id}
+            productId={props.product._id}
+          />
         </CardContent>
       </div>
       <CardMedia

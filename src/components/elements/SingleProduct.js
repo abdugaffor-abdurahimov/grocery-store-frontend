@@ -47,26 +47,35 @@ export default function MediaCard({ product }) {
             {product.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {product.description.slice(0, 100)}
+            {product.description.slice(0, 50)}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button
-          size="small"
-          color="primary"
-          onClick={() => {
-            if (userInfos._id) {
-              dispatch(sendAddProductToCart(product._id, userInfos._id));
-            } else {
-              history.push("/login");
+        {userInfos.cart.find((item) => item.product._id === product._id) ? (
+          <ProductChangeInput
+            value={
+              userInfos.cart.find((item) => item.product._id === product._id)
+                .amount
             }
-          }}
-        >
-          Add Cart
-        </Button>
-
-        {userInfos.cart && <ProductChangeInput />}
+            userId={userInfos._id}
+            productId={product._id}
+          />
+        ) : (
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => {
+              if (userInfos._id) {
+                dispatch(sendAddProductToCart(product._id, userInfos._id));
+              } else {
+                history.push("/login");
+              }
+            }}
+          >
+            Add to Cart
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
