@@ -51,8 +51,6 @@ export default function ProductChangeInput({ value, productId, userId }) {
             amount: parseInt(newVal),
           }
         );
-        console.log(newVal);
-        console.log(res.data);
         if (res.statusText === "OK") {
           dispatch(postAddProductSuccess(res.data));
         }
