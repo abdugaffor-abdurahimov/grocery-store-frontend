@@ -9,10 +9,10 @@ import {
   Grid,
   Typography,
 } from "@material-ui/core";
-import TextField from "../../../components/elements/TextField";
-import fetchDefault from "../../../clients";
-import { DangerAlert } from "../../../components/elements/Alerts";
-import WalmartIcon from "../../../components/elements/WalmartIcon";
+import TextField from "../../components/elements/TextField";
+import fetchDefault from "../../clients";
+import { DangerAlert } from "../../components/elements/Alerts";
+import WalmartIcon from "../../components/elements/WalmartIcon";
 
 const Login = () => {
   const [inputData, setInputData] = useState({

@@ -7,11 +7,11 @@ import {
   Grid,
   Typography,
 } from "@material-ui/core";
-import TextField from "../../../components/elements/TextField";
+import TextField from "../../components/elements/TextField";
 import { Link, useHistory } from "react-router-dom";
-import { DangerAlert } from "../../../components/elements/Alerts";
-import Progreses from "../../../components/elements/Progreses";
-import fetchDefault from "../../../clients";
+import { DangerAlert } from "../../components/elements/Alerts";
+import Progreses from "../../components/elements/Progreses";
+import fetchDefault from "../../clients";
 
 const Register = () => {
   const [inputData, setInputData] = useState({
