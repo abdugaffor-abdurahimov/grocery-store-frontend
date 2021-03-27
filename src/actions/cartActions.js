@@ -14,7 +14,7 @@ const postAddProductFailure = (err) => ({
   payload: err,
 });
 
-const postAddProductSuccess = (data) => ({
+export const postAddProductSuccess = (data) => ({
   type: c.POST_PRODUCT_TO_CART_SUCCESS,
   payload: data,
 });
@@ -52,7 +52,7 @@ export function sendAddProductToCart(productId, userId, amount = 1) {
       })
       .then((response) => {
         if (response.statusText === "Created") {
-          dispatch(postAddProductSuccess(response.data.reverse()));
+          dispatch(postAddProductSuccess(response.data));
         }
       })
       .catch((err) => {

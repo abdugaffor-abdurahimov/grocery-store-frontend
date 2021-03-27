@@ -1,9 +1,11 @@
 import { makeStyles, Typography } from "@material-ui/core";
 
-import React, { useState } from "react";
+import React from "react";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import { fetchWithTokens } from "../../clients";
+import { useDispatch } from "react-redux";
+import { postAddProductSuccess } from "../../actions/cartActions";
 
 const useStyles = makeStyles(() => ({
   root: { display: "flex" },
@@ -30,22 +32,31 @@ const useStyles = makeStyles(() => ({
 export default function ProductChangeInput({ value, productId, userId }) {
   const classes = useStyles();
 
-  const [amount, setAmount] = useState(value);
+  const dispatch = useDispatch();
 
   const updateProductAmount = async (newVal) => {
-    console.log("newVal: " + newVal);
-    setAmount(newVal);
-    if (amount < 0) {
-      setAmount(0);
-    } else {
-      setAmount(newVal);
-    }
-
     try {
-      console.log("amount", amount);
-      fetchWithTokens.put(`/api/users/${userId}/updateCartAmout/${productId}`, {
-        amount: parseInt(newVal),
-      });
+      if (newVal === 0) {
+        const res = await fetchWithTokens.delete(
+          `/api/users/${userId}/updateCart/${productId}`
+        );
+
+        if (res.statusText === "Accepted") {
+          dispatch(postAddProductSuccess(res.data));
+        }
+      } else {
+        const res = await fetchWithTokens.put(
+          `/api/users/${userId}/updateCartAmout/${productId}`,
+          {
+            amount: parseInt(newVal),
+          }
+        );
+        console.log(newVal);
+        console.log(res.data);
+        if (res.statusText === "OK") {
+          dispatch(postAddProductSuccess(res.data));
+        }
+      }
     } catch (error) {
       console.log(error);
     }
@@ -60,16 +71,18 @@ export default function ProductChangeInput({ value, productId, userId }) {
       <RemoveIcon
         className={classes.remove}
         onClick={() => {
-          updateProductAmount(amount - 1);
+          updateProductAmount(value - 1);
         }}
       />
 
       <input
         type="number"
         className={classes.input}
-        value={amount}
+        value={value}
         onChange={(e) =>
-          setAmount(typeof e.target.value === "number" ? "" : e.target.value)
+          updateProductAmount(
+            typeof e.target.value === "number" ? "" : e.target.value
+          )
         }
         placeholder="Amount"
         min="1"
@@ -78,7 +91,7 @@ export default function ProductChangeInput({ value, productId, userId }) {
       <AddIcon
         className={classes.add}
         onClick={() => {
-          updateProductAmount(amount + 1);
+          updateProductAmount(value + 1);
         }}
       />
     </Typography>
