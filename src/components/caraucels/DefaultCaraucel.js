@@ -1,9 +1,9 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Slider from "react-slick";
 import SingleProduct from "../elements/SingleProduct";
-import useWindowWidth from "../../hooks/useWindowWidth";
+// import useWindowWidth from "../../hooks/useWindowWidth";
 
 const settings = {
   dots: true,
@@ -41,22 +41,19 @@ const settings = {
 };
 
 const DefaultCaraucel = ({ data }) => {
-  const width = useWindowWidth();
-  const [sliderRight, setSliderRight] = useState(320);
+  // const width = useWindowWidth();
+  // const [sliderRight, setSliderRight] = useState(320);
 
-  useEffect(() => {
-    if (width < 1000) {
-      setSliderRight(30);
-    }
-  }, [width]);
+  // useEffect(() => {
+  //   if (width < 1000) {
+  //     setSliderRight(30);
+  //   }
+  // }, [width]);
 
   return (
     <div
       style={{
-        position: "absolute",
-        width: "100%",
-        right: sliderRight,
-        left: 30,
+        width: "99%",
       }}
     >
       <h2> Single Item</h2>

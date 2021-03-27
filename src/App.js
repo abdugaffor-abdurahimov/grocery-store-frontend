@@ -6,10 +6,12 @@ import DrawerCard from "./components/navbars/CartDrawer";
 import Appbar from "./components/navbars/Appbar";
 import useDocumentTitle from "./hooks/useDocumentTitle";
 import Details from "./pages/details";
+import { useState } from "react";
 
 function App() {
   const location = useLocation();
-
+  const [cartOpen, setCartOpen] = useState(false);
+  const toggleCart = () => setCartOpen(!cartOpen);
   useDocumentTitle(location.pathname.split("/")[1].toUpperCase());
 
   return (
@@ -17,15 +19,15 @@ function App() {
       <Route path="/login" exact component={Login} />
       <Route path="/register" exact component={Register} />
 
-      <main id="shoppingContent" style={{ margin: "80px 20px" }}>
+      <main id="shoppingContent">
         <Route path="/" exact component={Home} />
         <Route path="/details/:id" component={Details} />
       </main>
 
       {location.pathname === "/login" || location.pathname === "/register" || (
         <>
-          <Appbar />
-          <DrawerCard />
+          <Appbar toggleCart={toggleCart} />
+          <DrawerCard cartOpen={cartOpen} />
         </>
       )}
     </div>

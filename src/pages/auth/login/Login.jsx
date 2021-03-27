@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import {
   Button,
   Checkbox,
+  CircularProgress,
   FormControlLabel,
   FormHelperText,
   Grid,
@@ -10,7 +11,6 @@ import {
 } from "@material-ui/core";
 import TextField from "../../../components/elements/TextField";
 import fetchDefault from "../../../clients";
-import Progreses from "../../../components/elements/Progreses";
 import { DangerAlert } from "../../../components/elements/Alerts";
 import WalmartIcon from "../../../components/elements/WalmartIcon";
 
@@ -21,7 +21,7 @@ const Login = () => {
     keepSignedIn: false,
   });
 
-  const [disabled, setDisabled] = useState(true);
+  const [disabled, setDisabled] = useState(false);
 
   const history = useHistory();
 
@@ -48,15 +48,21 @@ const Login = () => {
     fetchDefault
       .post("/api/users/login", user)
       .then((res) => {
-        if ((res.statusText = "ok")) {
+        if ((res.statusText = "OK")) {
           localStorage.setItem("accessToken", res.data.accessToken);
           localStorage.setItem("refreshToken", res.data.refreshToken);
-          setLoading(false);
-          history.push("/");
+
+          setTimeout(() => {
+            setLoading(false);
+            history.push("/");
+          }, 3000);
+        } else {
+          setError("Email or password not valid");
         }
       })
-      .catch((err) => setError("Email or password not valid"))
-      .finally(setLoading(false));
+      .catch((err) => {
+        setError("Email or password not valid");
+      });
   };
 
   useEffect(() => {
@@ -74,7 +80,7 @@ const Login = () => {
       className="auth-grid"
     >
       {loading ? (
-        <Progreses />
+        <CircularProgress />
       ) : (
         <div>
           <WalmartIcon />

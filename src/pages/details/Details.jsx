@@ -1,4 +1,4 @@
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress, Container } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
@@ -30,7 +30,7 @@ export default function Details() {
   }, [dispatch, id, currentProduct._id]);
 
   return (
-    <div>
+    <Container>
       {currentProduct._id ? (
         <>
           <img src={currentProduct.images[0]} alt="product-img" />
@@ -40,6 +40,6 @@ export default function Details() {
       ) : (
         <CircularProgress color="secondary" />
       )}
-    </div>
+    </Container>
   );
 }

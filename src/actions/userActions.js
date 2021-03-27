@@ -1,6 +1,5 @@
 import { fetchWithTokens } from "../clients";
 import { user_action_types as c } from "./constants";
-
 export const getUser = () => ({
   type: c.GET_USER,
 });
@@ -15,12 +14,14 @@ export const getUserFailure = (error) => ({
   payload: error,
 });
 
-export function fetchUser() {
+export function fetchUser(signal) {
   return async (dispatch) => {
     dispatch(getUser());
 
     try {
-      const res = await fetchWithTokens.get("/api/users/me");
+      const res = await fetchWithTokens.get("/api/users/me", {
+        signal,
+      });
 
       if (res.statusText === "OK") {
         dispatch(getUserSuccess(res.data));
