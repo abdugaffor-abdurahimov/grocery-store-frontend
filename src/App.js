@@ -7,6 +7,7 @@ import Appbar from "./components/navbars/Appbar";
 import useDocumentTitle from "./hooks/useDocumentTitle";
 import Details from "./pages/details";
 import { useState } from "react";
+import Checkout from "./pages/checkout/Checkout";
 
 function App() {
   const location = useLocation();
@@ -22,6 +23,7 @@ function App() {
       <main id="shoppingContent">
         <Route path="/" exact component={Home} />
         <Route path="/details/:id" component={Details} />
+        <Route path="/checkout" component={Checkout} />
       </main>
 
       {location.pathname === "/login" || location.pathname === "/register" || (

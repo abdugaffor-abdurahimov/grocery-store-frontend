@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import SingleCart from "../elements/SingleCart";
 
 const drawerWidth = 320;
@@ -34,15 +35,18 @@ const useStyles = makeStyles(() => ({
   order: {
     position: "fixed",
     bottom: 0,
-    right: 25,
     textAlign: "center",
-    backgroundColor: "white",
     width: drawerWidth,
+    backgroundColor: "rgba(255, 255, 255, 0.95)",
+  },
+  btn: {
+    margin: "0 0 15px 0",
   },
 }));
 
 export default function CartDrawer(props) {
   const classes = useStyles();
+  const history = useHistory();
 
   const { cart } = useSelector((state) => state.user.userInfos);
 
@@ -63,7 +67,6 @@ export default function CartDrawer(props) {
           ))}
       </List>
 
-      {/* ss */}
       <div className={classes.order}>
         <h4>
           Subtotal:{" "}
@@ -72,7 +75,14 @@ export default function CartDrawer(props) {
             .reduce((acc, item) => acc + item, 0)}
           $
         </h4>
-        <Button variant="contained" color="secondary">
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => {
+            history.push("/checkout");
+          }}
+          className={classes.btn}
+        >
           Checkout
         </Button>
       </div>

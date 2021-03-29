@@ -10,6 +10,12 @@ import rootReducer from "./reducers";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 
+// STRIPE SETUP
+import { loadStripe } from "@stripe/stripe-js";
+import { CartProvider } from "use-shopping-cart";
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_PUBLIC);
+
 const composedEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
@@ -20,7 +26,17 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <CartProvider
+        mode="client-only"
+        stripe={stripePromise}
+        successUrl="stripe.com"
+        cancelUrl="twitter.com/dayhaysoos"
+        currency="USD"
+        allowedCountries={["US", "GB", "CA", "UZ"]}
+        billingAddressCollection={true}
+      >
+        <App />
+      </CartProvider>
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")
