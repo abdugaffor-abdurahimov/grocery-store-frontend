@@ -50,7 +50,8 @@ export default function Appbar(props) {
           </form>
         </div>
         <PermIdentityIcon />
-        {userInfos._id ? `Hi, ${userInfos.firstname}` : <>Account</>}
+
+        {userInfos._id && `Hi, ${userInfos.firstname}`}
         <IconButton onClick={props.toggleCart} aria-label="cart">
           <StyledBadge
             badgeContent={

@@ -48,6 +48,7 @@ const Login = () => {
     fetchDefault
       .post("/api/users/login", user)
       .then((res) => {
+        console.log("res", res);
         if ((res.statusText = "OK")) {
           localStorage.setItem("accessToken", res.data.accessToken);
           localStorage.setItem("refreshToken", res.data.refreshToken);
@@ -57,11 +58,13 @@ const Login = () => {
             history.push("/");
           }, 3000);
         } else {
+          setLoading(false);
           setError("Email or password not valid");
         }
       })
       .catch((err) => {
-        setError("Email or password not valid");
+        setLoading(false);
+        setError(err.response.data.errors);
       });
   };
 
