@@ -51,41 +51,47 @@ export default function CartDrawer(props) {
   const { cart } = useSelector((state) => state.user.userInfos);
 
   return (
-    <Drawer variant="persistent" open={props.cartOpen} anchor="right">
-      <div className={classes.drawerContainer} />
-      <Typography variant="body1" className={classes.cartHeader}>
-        <b>Cart</b>
-        <b>Items</b>
-      </Typography>
-      <Divider />
-      <List>
-        {cart &&
-          cart.map((product, key) => (
-            <ListItem key={key}>
-              <SingleCart {...product} />
-            </ListItem>
-          ))}
-      </List>
+    <>
+      {history.location.pathname === "/checkout" ? (
+        <></>
+      ) : (
+        <Drawer variant="persistent" open={props.cartOpen} anchor="right">
+          <div className={classes.drawerContainer} />
+          <Typography variant="body1" className={classes.cartHeader}>
+            <b>Cart</b>
+            <b>Items</b>
+          </Typography>
+          <Divider />
+          <List>
+            {cart &&
+              cart.map((product, key) => (
+                <ListItem key={key}>
+                  <SingleCart {...product} />
+                </ListItem>
+              ))}
+          </List>
 
-      <div className={classes.order}>
-        <h4>
-          Subtotal:{" "}
-          {cart
-            .map((item) => item.amount * item.product.price)
-            .reduce((acc, item) => acc + item, 0)}
-          $
-        </h4>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={() => {
-            history.push("/checkout");
-          }}
-          className={classes.btn}
-        >
-          Checkout
-        </Button>
-      </div>
-    </Drawer>
+          <div className={classes.order}>
+            <h4>
+              Subtotal:{" "}
+              {cart
+                .map((item) => item.amount * item.product.price)
+                .reduce((acc, item) => acc + item, 0)}
+              $
+            </h4>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => {
+                history.push("/checkout");
+              }}
+              className={classes.btn}
+            >
+              Checkout
+            </Button>
+          </div>
+        </Drawer>
+      )}
+    </>
   );
 }
