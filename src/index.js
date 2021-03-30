@@ -10,6 +10,13 @@ import rootReducer from "./reducers";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 
+// STRIPE SETUP
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+// END OF STRIPE
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_PUBLIC);
+
 const composedEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
@@ -20,7 +27,9 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <Elements stripe={stripePromise}>
+        <App />
+      </Elements>
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")

@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MediaCard({ product }) {
+export default function SigleProduct({ product }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();

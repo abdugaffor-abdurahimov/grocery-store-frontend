@@ -50,9 +50,18 @@ export default function Appbar(props) {
           </form>
         </div>
         <PermIdentityIcon />
-        {userInfos._id ? `Hi, ${userInfos.firstname}` : <>Account</>}
+
+        {userInfos._id && `Hi, ${userInfos.firstname}`}
         <IconButton onClick={props.toggleCart} aria-label="cart">
-          <StyledBadge badgeContent={userInfos.cart.length} color="secondary">
+          <StyledBadge
+            badgeContent={
+              userInfos.cart.length &&
+              userInfos.cart
+                .map((item) => item.amount)
+                .reduce((acc, item) => acc + item)
+            }
+            color="secondary"
+          >
             <ShoppingCartIcon />
           </StyledBadge>
         </IconButton>

@@ -6,6 +6,8 @@
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
+    "@stripe/react-stripe-js": "^1.4.0",
+    "@stripe/stripe-js": "^1.13.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -19,6 +21,7 @@
     "react-slick": "^0.28.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "use-shopping-cart": "^2.4.3",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
