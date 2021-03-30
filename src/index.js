@@ -12,7 +12,8 @@ import { Provider } from "react-redux";
 
 // STRIPE SETUP
 import { loadStripe } from "@stripe/stripe-js";
-import { CartProvider } from "use-shopping-cart";
+import { Elements } from "@stripe/react-stripe-js";
+// END OF STRIPE
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_PUBLIC);
 
@@ -26,17 +27,9 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <CartProvider
-        mode="client-only"
-        stripe={stripePromise}
-        successUrl="stripe.com"
-        cancelUrl="twitter.com/dayhaysoos"
-        currency="USD"
-        allowedCountries={["US", "GB", "CA", "UZ"]}
-        billingAddressCollection={true}
-      >
+      <Elements stripe={stripePromise}>
         <App />
-      </CartProvider>
+      </Elements>
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")
