@@ -34,7 +34,7 @@ export default function Appbar(props) {
           <Drawer open={drawerOpen} onClose={toggleDrawer}>
             <CategoryDrawer toggleDrawer={toggleDrawer} />
           </Drawer>
-          {/* <Link to="/">Home</Link> */}
+          <Link to="/">Home</Link>
         </div>
         <div className={classes.searchBar}>
           <form className={classes.searchForm}>

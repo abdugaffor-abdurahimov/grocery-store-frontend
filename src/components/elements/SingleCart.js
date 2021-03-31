@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MediaControlCard(props) {
+export default function SingleCart(props) {
   const classes = useStyles();
   const { userInfos } = useSelector((state) => state.user);
   return (

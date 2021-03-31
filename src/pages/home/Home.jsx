@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../actions/productsActions";
 import { Container } from "@material-ui/core";
 import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {

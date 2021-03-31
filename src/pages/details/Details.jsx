@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { setCurrentProduct } from "../../actions/productsActions";
 import fetchDefault from "../../clients";
+import { Carousel } from "react-responsive-carousel";
+import ProductChangeInput from "../../components/elements/ProductChangeInput";
+
+export const fixedWidth = () => <Carousel width="700px"></Carousel>;
 
 export default function Details() {
   const { currentProduct } = useSelector((state) => state.products);
@@ -33,9 +37,23 @@ export default function Details() {
     <Container>
       {currentProduct._id ? (
         <>
-          <img src={currentProduct.images[0]} alt="product-img" />
+          <Carousel showArrows={true} width="400px">
+            {currentProduct.images.map((image, index) => (
+              <div key={index}>
+                <img src={image} alt="img-prd" />
+              </div>
+            ))}
+          </Carousel>
           <br />
-          {currentProduct.description}
+          <ProductChangeInput
+            // value={amount}
+            // userId={userInfos._id}
+            productId={currentProduct._id}
+          />
+          <br />
+          <></>
+          <h1>Price: {currentProduct.price} $</h1>
+          <p>{currentProduct.description}</p>
         </>
       ) : (
         <CircularProgress color="secondary" />
