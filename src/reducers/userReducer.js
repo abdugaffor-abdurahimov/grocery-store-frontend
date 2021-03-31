@@ -1,4 +1,7 @@
-import { user_action_types as c } from "../actions/constants";
+import {
+  user_action_types as c,
+  cart_action_types as cat,
+} from "../actions/constants";
 
 const initialState = {
   userInfos: {
@@ -7,6 +10,7 @@ const initialState = {
     lastname: null,
     email: null,
     role: "user",
+    cart: [],
   },
   loading: false,
   error: null,
@@ -25,6 +29,12 @@ export default function userReducer(state = initialState, action) {
         ...state,
         error: action.payload,
         loading: false,
+      };
+
+    case cat.POST_PRODUCT_TO_CART_SUCCESS:
+      return {
+        ...state,
+        userInfos: { ...state.userInfos, cart: action.payload },
       };
 
     default:

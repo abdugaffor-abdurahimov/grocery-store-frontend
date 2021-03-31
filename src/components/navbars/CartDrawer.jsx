@@ -1,4 +1,5 @@
 import {
+  Button,
   Divider,
   Drawer,
   List,
@@ -6,9 +7,9 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import useWindowWidth from "../../hooks/useWindowWidth";
+import { useHistory } from "react-router";
 import SingleCart from "../elements/SingleCart";
 
 const drawerWidth = 320;
@@ -22,6 +23,7 @@ const useStyles = makeStyles(() => ({
     width: drawerWidth,
   },
   drawerContainer: {
+    width: drawerWidth,
     overflow: "auto",
     marginTop: "80px",
   },
@@ -30,46 +32,66 @@ const useStyles = makeStyles(() => ({
     justifyContent: "space-between",
     margin: "0 10px",
   },
+  order: {
+    position: "fixed",
+    bottom: 0,
+    textAlign: "center",
+    width: drawerWidth,
+    backgroundColor: "rgba(255, 255, 255, 0.95)",
+  },
+  btn: {
+    margin: "0 0 15px 0",
+  },
 }));
 
-export default function CartDrawer() {
+export default function CartDrawer(props) {
   const classes = useStyles();
-  const width = useWindowWidth();
-  const [show, setShow] = useState(false);
-  const { basket } = useSelector((state) => state.cart);
+  const history = useHistory();
 
-  useEffect(() => {
-    if (width > 1000) {
-      setShow(true);
-    } else {
-      setShow(false);
-    }
-  }, [width]);
+  const { cart } = useSelector((state) => state.user.userInfos);
 
-  return show ? (
-    <Drawer
-      className={classes.drawer}
-      variant="permanent"
-      classes={{
-        paper: classes.drawerPaper,
-      }}
-      anchor="right"
-    >
-      <div className={classes.drawerContainer} />
-      <Typography variant="body1" className={classes.cartHeader}>
-        <b>Cart</b>
-        <b>Items</b>
-      </Typography>
-      <Divider />
-      <List>
-        {Object.keys(basket).map((key) => (
-          <ListItem key={key}>
-            <SingleCart {...basket[key]} key={key} />
-          </ListItem>
-        ))}
-      </List>
-    </Drawer>
-  ) : (
-    <></>
+  return (
+    <>
+      {history.location.pathname === "/checkout" ? (
+        <></>
+      ) : (
+        <Drawer variant="persistent" open={props.cartOpen} anchor="right">
+          <div className={classes.drawerContainer} />
+          <Typography variant="body1" className={classes.cartHeader}>
+            <b>Cart</b>
+            <b>Items</b>
+          </Typography>
+          <Divider />
+          <List>
+            {cart &&
+              cart.map((product, key) => (
+                <ListItem key={key}>
+                  <SingleCart {...product} />
+                </ListItem>
+              ))}
+          </List>
+
+          <div className={classes.order}>
+            <h4>
+              Subtotal:{" "}
+              {cart
+                .map((item) => item.amount * item.product.price)
+                .reduce((acc, item) => acc + item, 0)}
+              $
+            </h4>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => {
+                history.push("/checkout");
+              }}
+              className={classes.btn}
+            >
+              Checkout
+            </Button>
+          </div>
+        </Drawer>
+      )}
+    </>
   );
 }

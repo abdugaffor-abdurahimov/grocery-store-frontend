@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => {
       borderRadius: "22px 0 0 22px",
       padding: "0 10px",
       color: "#000000",
+      width: "300px",
     },
 
     serchButton: {
