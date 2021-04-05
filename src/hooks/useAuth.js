@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUser } from "../actions/userActions";
+import { fetchUser } from "../redux/actions/userActions";
 
 const useAuth = () => {
   const dispatch = useDispatch();

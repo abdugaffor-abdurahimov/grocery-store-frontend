@@ -1,10 +1,12 @@
 import useAuth from "../../hooks/useAuth";
+import SingleProduct from "../../components/elements/SingleProduct";
+
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../redux/actions/productsActions";
-import { Container, Paper } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import { Carousel } from "react-responsive-carousel";
 import { Alert } from "@material-ui/lab";
 
@@ -19,19 +21,9 @@ const useStyles = makeStyles((theme) => ({
   control: {
     padding: theme.spacing(2),
   },
-
-  categoryBox: {
-    display: "flex",
-    justifyContent: "space-around",
-  },
-  wrapper: {
-    backgroundColor: "white",
-    width: `${100 / 3}%`,
-    border: "1px solid #f5f5f5",
-  },
 }));
 
-export default function Home() {
+export default function PickupDelivery() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { data, error } = useSelector((state) => state.products);
@@ -42,6 +34,10 @@ export default function Home() {
       dispatch(fetchProducts());
     }
   }, [dispatch, data.length]);
+
+  // const handleChange = (event) => {
+  //   setSpacing(Number(event.target.value));
+  // };
 
   return (
     <Grid container className={classes.root}>
@@ -80,35 +76,14 @@ export default function Home() {
               <p className="legend">Lorem, ipsum dolor.</p>
             </div>
           </Carousel>
-
           <Grid item xs={12}>
-            <Paper style={{ backgroundColor: "#f5f5f5" }}>
-              <div className={classes.categoryBox}>
-                <div className={classes.wrapper}>
-                  <div>Pickup or delivery</div>
-                  <img
-                    src="https://res.cloudinary.com/duq2fqsvm/image/upload/w_200,h_200,c_limit,e_blur:100,o_90,b_black/l_text:arial_80:®,ar_1:1,c_lfill,o_60,co_rgb:ffffff,b_rgb:000000,r_max/v1617626798/GROCERY/jeshoots-com-eCktzGjC-iU-unsplash_cfdgs1.jpg"
-                    alt="ooo"
-                  />
-                </div>
-
-                <div className={classes.wrapper}>
-                  <div>Earn 3% cash back</div>
-                  <img
-                    src="https://res.cloudinary.com/duq2fqsvm/image/upload/w_200,h_200,c_limit,e_blur:100,o_90,b_black/l_text:arial_80:®,ar_1:1,c_lfill,o_60,co_rgb:ffffff,b_rgb:000000,r_max/v1617626798/GROCERY/jeshoots-com-eCktzGjC-iU-unsplash_cfdgs1.jpg"
-                    alt="ooo"
-                  />
-                </div>
-
-                <div className={classes.wrapper}>
-                  <div>No order minimum shipping</div>
-                  <img
-                    src="https://res.cloudinary.com/duq2fqsvm/image/upload/w_200,h_200,c_limit,e_blur:100,o_90,b_black/l_text:arial_80:®,ar_1:1,c_lfill,o_60,co_rgb:ffffff,b_rgb:000000,r_max/v1617626798/GROCERY/jeshoots-com-eCktzGjC-iU-unsplash_cfdgs1.jpg"
-                    alt="ooo"
-                  />
-                </div>
-              </div>
-            </Paper>
+            <Grid container justify="center" spacing={2}>
+              {data.map((product, idx) => (
+                <Grid key={idx} item>
+                  <SingleProduct product={product} />
+                </Grid>
+              ))}
+            </Grid>
           </Grid>
         </Container>
       )}

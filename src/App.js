@@ -1,4 +1,5 @@
 import "./App.scss";
+import "react-multi-carousel/lib/styles.css";
 import { Route, useLocation } from "react-router-dom";
 import { Login, Register } from "./pages/auth";
 import Home from "./pages/home";
@@ -9,6 +10,7 @@ import Details from "./pages/details";
 import { useState } from "react";
 import Checkout from "./pages/checkout/Checkout";
 import Footer from "./components/footer/Footer";
+import PickupDelivery from "./pages/pickup-delivery";
 
 function App() {
   const location = useLocation();
@@ -21,17 +23,18 @@ function App() {
       <Route path="/login" exact component={Login} />
       <Route path="/register" exact component={Register} />
 
-      <main id="shoppingContent">
+      <main id="shoppingContent" style={{ minHeight: "60vh" }}>
         <Route path="/" exact component={Home} />
         <Route path="/details/:id" component={Details} />
         <Route path="/checkout" component={Checkout} />
-        <Footer />
+        <Route path="/pickup-delivery" component={PickupDelivery} />
       </main>
 
       {location.pathname === "/login" || location.pathname === "/register" || (
         <>
           <Appbar toggleCart={toggleCart} />
           <DrawerCard cartOpen={cartOpen} />
+          <Footer />
         </>
       )}
     </div>

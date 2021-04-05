@@ -2,6 +2,8 @@ import { useEffect } from "react";
 
 export default function useDocumentTitle(title) {
   useEffect(() => {
-    document.title = title;
+    if (title !== "") {
+      document.title = title;
+    }
   });
 }

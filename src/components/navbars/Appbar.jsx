@@ -1,24 +1,44 @@
-import { AppBar, Drawer, Toolbar } from "@material-ui/core";
+import { AppBar, Button, Drawer, Toolbar } from "@material-ui/core";
 import React, { useState } from "react";
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
 import CategoryDrawer from "./CategoryDrawer";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { StyledBadge } from "../elements/Badges";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import SearchIcon from "@material-ui/icons/Search";
 import useStyles from "../../hooks/useStyles";
 import { useSelector } from "react-redux";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 
 export default function Appbar(props) {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const toggleDrawer = () => setDrawerOpen(!drawerOpen);
   const { userInfos } = useSelector((state) => state.user);
+  const [currenTab, setCurrentTab] = React.useState(0);
+  const history = useHistory();
+
+  const handleChange = (e, newValue) => {
+    setCurrentTab(newValue);
+  };
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
+      <Tabs
+        value={currenTab}
+        onChange={handleChange}
+        aria-label="simple tabs example"
+      >
+        <Tab
+          label="Pickup & delivery"
+          onClick={() => history.push("/pickup-delivery")}
+        />
+        <Tab label="Grocery.com" onClick={() => history.push("/")} />
+      </Tabs>
+
       <Toolbar className={classes.toolBar}>
         <div>
           <IconButton
@@ -34,7 +54,7 @@ export default function Appbar(props) {
           <Drawer open={drawerOpen} onClose={toggleDrawer}>
             <CategoryDrawer toggleDrawer={toggleDrawer} />
           </Drawer>
-          <Link to="/">Home</Link>
+          <Button onClick={() => window.location.replace("/")}>Home</Button>
         </div>
         <div className={classes.searchBar}>
           <form className={classes.searchForm}>

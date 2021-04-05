@@ -1,4 +1,4 @@
-import fetchDefault from "../clients";
+import fetchDefault from "../../clients";
 import { products_action_types as c } from "./constants";
 
 export const getProducts = () => ({

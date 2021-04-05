@@ -2,7 +2,7 @@ import { CircularProgress, Container } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { setCurrentProduct } from "../../actions/productsActions";
+import { setCurrentProduct } from "../../redux/actions/productsActions";
 import fetchDefault from "../../clients";
 import { Carousel } from "react-responsive-carousel";
 import ProductChangeInput from "../../components/elements/ProductChangeInput";
