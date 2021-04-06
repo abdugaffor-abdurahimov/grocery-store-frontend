@@ -76,6 +76,7 @@ export default function PickupDelivery() {
               <p className="legend">Lorem, ipsum dolor.</p>
             </div>
           </Carousel>
+
           <Grid item xs={12}>
             <Grid container justify="center" spacing={2}>
               {data.map((product, idx) => (

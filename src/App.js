@@ -11,12 +11,14 @@ import { useState } from "react";
 import Checkout from "./pages/checkout/Checkout";
 import Footer from "./components/footer/Footer";
 import PickupDelivery from "./pages/pickup-delivery";
+import useAuth from "./hooks/useAuth";
 
 function App() {
   const location = useLocation();
   const [cartOpen, setCartOpen] = useState(false);
   const toggleCart = () => setCartOpen(!cartOpen);
   useDocumentTitle(location.pathname.split("/")[1].toUpperCase());
+  useAuth();
 
   return (
     <div className="App">
