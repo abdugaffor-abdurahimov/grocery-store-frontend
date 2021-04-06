@@ -27,7 +27,7 @@ export function fetchUser(signal) {
         dispatch(getUserSuccess(res.data));
       }
     } catch (error) {
-      dispatch(getUserFailure(error));
+      dispatch(getUserFailure(error.message));
     }
   };
 }
