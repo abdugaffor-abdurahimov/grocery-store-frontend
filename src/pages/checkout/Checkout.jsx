@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { useSelector } from "react-redux";
 import ProductChangeInput from "../../components/elements/ProductChangeInput";
 import CardInput from "../../components/elements/CartInput";
-import { useStripe, useElements, CartElement } from "@stripe/react-stripe-js";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import fetchDefault from "../../clients";
 import { Container, Grid } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
@@ -33,38 +33,32 @@ export default function Checkout() {
   const { userInfos } = useSelector((state) => state.user);
   const stripe = useStripe();
   const elements = useElements();
-  const handleSubmit = async (e) => {
+
+  const handleSubmit = async (event) => {
+    // Block native form submission.
+    event.preventDefault();
+
     if (!stripe || !elements) {
-      // Stripe has not yet loadeed
+      // Stripe.js has not loaded yet. Make sure to disable
+      // form submission until Stripe.js has loaded.
       return;
     }
 
-    try {
-      const res = await fetchDefault.post(
-        "/api/users/create-checkout-session",
-        {
-          email: userInfos.email,
-        }
-      );
+    // Get a reference to a mounted CardElement. Elements knows how
+    // to find your CardElement because there can only ever be one of
+    // each type of element.
+    const cardElement = elements.getElement(CardElement);
 
-      const clientSecret = res.data["client_secret"];
+    // Use your card Element with other Stripe.js APIs
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card: cardElement,
+    });
 
-      const result = await stripe.confirmCardPayment(clientSecret, {
-        cart: elements.getElement(CartElement),
-        billing_details: {
-          email: userInfos.email,
-        },
-      });
-
-      if (result.error) {
-        console.log(result.error.message);
-      } else {
-        if (result.paymentIntent.status === "succeeded") {
-          console.log("Transaction succeeded");
-        }
-      }
-    } catch (err) {
-      console.log(err);
+    if (error) {
+      console.log("[error]", error);
+    } else {
+      console.log("[PaymentMethod]", paymentMethod);
     }
   };
 
@@ -77,7 +71,8 @@ export default function Checkout() {
           </Typography>
           {userInfos.cart.map((item, idx) => (
             <div key={idx}>
-              <ListItem alignItems="flex-start">
+              <img src={item.product.images[0]} alt="prd" width="300px" />
+              {/* <ListItem alignItems="flex-start">
                 <ListItemAvatar>
                   <Avatar
                     variant="square"
@@ -105,10 +100,12 @@ export default function Checkout() {
                   userId={userInfos._id}
                   productId={item.product._id}
                 />
-              </ListItem>
+              </ListItem> */}
               <Divider variant="inset" component="li" />
             </div>
           ))}
+
+          <br />
           <Typography variant="h4">
             Subtotal:
             {userInfos.cart
@@ -117,28 +114,12 @@ export default function Checkout() {
             $
           </Typography>
         </List>
-        <Card className={classes.root}>
-          <CardContent className={classes.content}>
-            <CardInput />
-            <div className={classes.div}>
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.button}
-                onClick={handleSubmit}
-              >
-                Pay
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.button}
-              >
-                Subscription
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+        <form onSubmit={handleSubmit}>
+          <CardElement />
+          <Button type="submit" disabled={!stripe}>
+            Pay
+          </Button>
+        </form>
       </Container>
     </Grid>
   );

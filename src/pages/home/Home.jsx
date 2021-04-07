@@ -9,6 +9,7 @@ import fetchDefault from "../../clients";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    textAlign: "center",
   },
   paper: {
     height: 140,
@@ -31,9 +32,9 @@ export default function Home() {
 
   const fetchPreview = async () => {
     try {
-      const response = await fetchDefault.get("");
-
-      if (response.statusText === "ok") {
+      const response = await fetchDefault.get("/api/products/home/preview");
+      console.log(response.data);
+      if (response.statusText === "OK") {
         setPreview(response.data);
       }
     } catch (error) {
@@ -110,19 +111,29 @@ export default function Home() {
               </Grid>
             </Paper>
 
-            <Grid container>
-              {preview.map((category) => (
-                <Grid item>
-                  <div className={classes.wrapper}>
-                    <div>No order minimum shipping</div>
-                    <img
-                      src="https://res.cloudinary.com/duq2fqsvm/image/upload/w_200,h_200,c_limit,e_blur:100,o_90,b_black/l_text:arial_80:®,ar_1:1,c_lfill,o_60,co_rgb:ffffff,b_rgb:000000,r_max/v1617626798/GROCERY/jeshoots-com-eCktzGjC-iU-unsplash_cfdgs1.jpg"
-                      alt="ooo"
-                    />
-                  </div>
+            <br />
+            <br />
+
+            {preview.map((category, idx) => (
+              <div
+                key={idx}
+                style={{
+                  marginTop: "20px",
+                  borderBottom: "1px solid black",
+                  paddingBottom: "10px",
+                }}
+              >
+                <h3>{category.title}</h3>
+                <Grid container justify="space-around" spacing={2}>
+                  {category.data.map((item, idx) => (
+                    <Grid item key={idx}>
+                      <img src={item.img} alt={item.name + "-img"} />
+                      <div>{item.name}</div>
+                    </Grid>
+                  ))}
                 </Grid>
-              ))}
-            </Grid>
+              </div>
+            ))}
           </Grid>
         </Container>
       )}

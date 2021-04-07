@@ -12,6 +12,7 @@ import Checkout from "./pages/checkout/Checkout";
 import Footer from "./components/footer/Footer";
 import PickupDelivery from "./pages/pickup-delivery";
 import useAuth from "./hooks/useAuth";
+import useScrollTop from "./hooks/useScrollTop";
 
 function App() {
   const location = useLocation();
@@ -19,13 +20,14 @@ function App() {
   const toggleCart = () => setCartOpen(!cartOpen);
   useDocumentTitle(location.pathname.split("/")[1].toUpperCase());
   useAuth();
+  useScrollTop();
 
   return (
     <div className="App">
       <Route path="/login" exact component={Login} />
       <Route path="/register" exact component={Register} />
 
-      <main id="shoppingContent" style={{ minHeight: "60vh" }}>
+      <main id="shoppingContent">
         <Route path="/" exact component={Home} />
         <Route path="/details/:id" component={Details} />
         <Route path="/checkout" component={Checkout} />
