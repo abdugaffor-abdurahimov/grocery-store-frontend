@@ -5,6 +5,7 @@ import { Container, Paper } from "@material-ui/core";
 import { Carousel } from "react-responsive-carousel";
 import { Alert } from "@material-ui/lab";
 import fetchDefault from "../../clients";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,6 +30,7 @@ export default function Home() {
   const classes = useStyles();
   const [preview, setPreview] = useState([]);
   const [error, setError] = useState(null);
+  const history = useHistory();
 
   const fetchPreview = async () => {
     try {
@@ -122,6 +124,7 @@ export default function Home() {
                   borderBottom: "1px solid black",
                   paddingBottom: "10px",
                 }}
+                onClick={() => history.push("/pickup-delivery")}
               >
                 <h3>{category.title}</h3>
                 <Grid container justify="space-around" spacing={2}>
