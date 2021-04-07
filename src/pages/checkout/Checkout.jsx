@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
@@ -6,8 +6,9 @@ import { useSelector } from "react-redux";
 import ProductChangeInput from "../../components/elements/ProductChangeInput";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { fetchWithTokens } from "../../clients";
-import { Container, Grid } from "@material-ui/core";
+import { CircularProgress, Container, Grid } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import { apiUrl } from "../../config/envVars";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,9 +26,11 @@ export default function Checkout() {
   const { userInfos } = useSelector((state) => state.user);
   const stripe = useStripe();
   const elements = useElements();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet. Make sure to disable
@@ -44,7 +47,6 @@ export default function Checkout() {
       source: "tok_visa",
       receipt_email: userInfos.email,
     });
-    console.log(res);
 
     // Get a reference to a mounted CardElement. Elements knows how
     // to find your CardElement because there can only ever be one of
@@ -75,6 +77,13 @@ export default function Checkout() {
         <Grid item xs={12} sm={7}>
           <Typography variant="h6" className={classes.title}>
             <b>{userInfos.cart.length} items</b>
+            <Button
+              color="secondary"
+              component="a"
+              href={apiUrl + `/api/users/${userInfos._id}/card/csv`}
+            >
+              Download as CSV
+            </Button>
           </Typography>
           {userInfos.cart.map((item, idx) => (
             <div key={idx}>
@@ -111,14 +120,20 @@ export default function Checkout() {
           <form onSubmit={handleSubmit}>
             <CardElement />
             <br />
-            <Button
-              type="submit"
-              disabled={!stripe}
-              color="secondary"
-              variant="contained"
-            >
-              Pay
-            </Button>
+
+            {loading ? (
+              <CircularProgress />
+            ) : (
+              <Button
+                type="submit"
+                disabled={!stripe}
+                color="secondary"
+                variant="contained"
+              >
+                {" "}
+                Pay
+              </Button>
+            )}
           </form>
         </Grid>
       </Grid>

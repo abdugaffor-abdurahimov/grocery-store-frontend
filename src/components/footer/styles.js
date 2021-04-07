@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Box = styled.div`
   padding: 20px 10px;
-  background-image: linear-gradient(to right top, #ffffff, #f1f1f2, #e3e3e4);
+  background-image: linear-gradient(to right top, #ffffff, #f1f1f2);
   margin: 100px 0 0 0;
   @media (max-width: 1000px) {
     padding: 70px 30px;
