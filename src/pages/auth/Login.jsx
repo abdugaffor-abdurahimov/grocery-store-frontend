@@ -28,7 +28,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const inputDataHondler = (e) => {
+  const inputDataHandler = (e) => {
     if (e.target.name === "keepSignedIn") {
       setInputData({ ...inputData, [e.target.name]: e.target.checked });
     } else {
@@ -92,7 +92,7 @@ const Login = () => {
             <TextField
               name="email"
               value={inputData.email}
-              onChange={inputDataHondler}
+              onChange={inputDataHandler}
               label="Email"
             />
             <TextField
@@ -100,7 +100,7 @@ const Login = () => {
               name="password"
               label="Create a password"
               value={inputData.password}
-              onChange={inputDataHondler}
+              onChange={inputDataHandler}
             />
 
             <Link to="###" className="align-end">
@@ -111,7 +111,7 @@ const Login = () => {
               control={
                 <Checkbox
                   checked={inputData.keepSignedIn}
-                  onChange={inputDataHondler}
+                  onChange={inputDataHandler}
                   name="keepSignedIn"
                 />
               }

@@ -5,7 +5,7 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import { fetchWithTokens } from "../../clients";
 import { useDispatch } from "react-redux";
-import { postAddProductSuccess } from "../../actions/cartActions";
+import { postAddProductSuccess } from "../../redux/actions/cartActions";
 
 const useStyles = makeStyles(() => ({
   root: { display: "flex" },

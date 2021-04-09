@@ -1,4 +1,4 @@
-import { fetchWithTokens } from "../clients";
+import { fetchWithTokens } from "../../clients";
 import { cart_action_types as c } from "./constants";
 
 export const addProductToCart = (productId, amount = 1) => ({

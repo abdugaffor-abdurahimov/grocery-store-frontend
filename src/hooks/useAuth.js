@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUser } from "../actions/userActions";
+import { fetchUser } from "../redux/actions/userActions";
 
 const useAuth = () => {
   const dispatch = useDispatch();
@@ -10,13 +10,13 @@ const useAuth = () => {
     const abortController = new AbortController();
     const signal = abortController.signal;
 
-    if (!userInfos._id) {
+    if (!error) {
       dispatch(fetchUser(signal));
     }
-    return function cleanup() {
+    return () => {
       abortController.abort();
     };
-  }, [dispatch, userInfos._id]);
+  }, [dispatch, error]);
 
   return { userInfos, loading, error };
 };

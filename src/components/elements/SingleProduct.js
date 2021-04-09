@@ -1,5 +1,5 @@
-import { sendAddProductToCart } from "../../actions/cartActions";
-import { setCurrentProduct } from "../../actions/productsActions";
+import { sendAddProductToCart } from "../../redux/actions/cartActions";
+import { setCurrentProduct } from "../../redux/actions/productsActions";
 
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
