@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => {
       padding: "0 10px",
       color: "#000000",
       width: "300px",
+      outline: "none",
     },
 
     serchButton: {

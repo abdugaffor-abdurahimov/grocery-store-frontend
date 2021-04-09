@@ -1,4 +1,4 @@
-import { fetchWithTokens } from "../clients";
+import { fetchWithTokens } from "../../clients";
 import { user_action_types as c } from "./constants";
 export const getUser = () => ({
   type: c.GET_USER,
@@ -27,7 +27,7 @@ export function fetchUser(signal) {
         dispatch(getUserSuccess(res.data));
       }
     } catch (error) {
-      dispatch(getUserFailure(error));
+      dispatch(getUserFailure(error.message));
     }
   };
 }
