@@ -17,13 +17,15 @@ const useStyles = makeStyles(() => ({
   },
   add: {
     position: "relative",
-    backgroundColor: "#00ff84",
+    backgroundColor: "#ffc220",
+    margin: "0 1px",
     borderRadius: "50%",
     cursor: "pointer",
   },
   remove: {
     position: "relative",
-    backgroundColor: "#00ff84",
+    backgroundColor: "#ffc220",
+    margin: "0 1px",
     borderRadius: "50%",
     cursor: "pointer",
   },
