@@ -8655,11 +8655,6 @@ pkg-up@3.1.0:
   dependencies:
     find-up "^3.0.0"
 
-pkill@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/pkill/-/pkill-2.0.0.tgz#7745bbbfe7c439353f48591d4165090d10b10370"
-  integrity sha1-d0W7v+fEOTU/SFkdQWUJDRCxA3A=
-
 pnp-webpack-plugin@1.6.4:
   version "1.6.4"
   resolved "https://registry.npmjs.org/pnp-webpack-plugin/-/pnp-webpack-plugin-1.6.4.tgz"
