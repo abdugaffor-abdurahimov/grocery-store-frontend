@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import { Container, Paper } from "@material-ui/core";
+import { CircularProgress, Container, Paper } from "@material-ui/core";
 import { Carousel } from "react-responsive-carousel";
 import { Alert } from "@material-ui/lab";
 import fetchDefault from "../../clients";
@@ -30,17 +30,20 @@ export default function Home() {
   const classes = useStyles();
   const [preview, setPreview] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   const fetchPreview = async () => {
+    setLoading(true);
     try {
       const response = await fetchDefault.get("/api/products/home/preview");
-      console.log(response.data);
+      setLoading(false);
       if (response.statusText === "OK") {
         setPreview(response.data);
       }
     } catch (error) {
-      setError(error);
+      setError(error.response);
+      setLoading(false);
     }
   };
 
@@ -50,10 +53,8 @@ export default function Home() {
 
   return (
     <Grid container className={classes.root}>
-      {error ? (
-        <Alert severity="error">
-          {error.message} please try to refresh the page.
-        </Alert>
+      {loading ? (
+        <CircularProgress />
       ) : (
         <Container>
           <Carousel>
@@ -112,6 +113,13 @@ export default function Home() {
                 </Grid>
               </Grid>
             </Paper>
+            <br />
+
+            {error && (
+              <Alert severity="error">
+                {error.message} please try to refresh the page.
+              </Alert>
+            )}
 
             <br />
             <br />

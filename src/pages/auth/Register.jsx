@@ -30,7 +30,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const inputDataHondler = (e) => {
+  const inputDataHandler = (e) => {
     if (
       e.target.name === "keepSignedIn" ||
       e.target.name === "emailNotification"
@@ -103,21 +103,21 @@ const Register = () => {
               <TextField
                 name="firstname"
                 value={inputData.firstname}
-                onChange={inputDataHondler}
+                onChange={inputDataHandler}
                 label="First name"
               />
 
               <TextField
                 name="lastname"
                 value={inputData.lastname}
-                onChange={inputDataHondler}
+                onChange={inputDataHandler}
                 label="First name"
               />
 
               <TextField
                 name="email"
                 value={inputData.email}
-                onChange={inputDataHondler}
+                onChange={inputDataHandler}
                 label="Email"
               />
               <TextField
@@ -125,13 +125,13 @@ const Register = () => {
                 name="password"
                 label="Create a password"
                 value={inputData.password}
-                onChange={inputDataHondler}
+                onChange={inputDataHandler}
               />
               <FormControlLabel
                 control={
                   <Checkbox
                     checked={inputData.keepSignedIn}
-                    onChange={inputDataHondler}
+                    onChange={inputDataHandler}
                     name="keepSignedIn"
                   />
                 }
@@ -140,7 +140,7 @@ const Register = () => {
               />
 
               <FormControlLabel
-                onChange={inputDataHondler}
+                onChange={inputDataHandler}
                 name="emailNotification"
                 control={<Checkbox name="emailNotification" />}
                 label={

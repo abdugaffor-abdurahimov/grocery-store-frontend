@@ -1,6 +1,6 @@
 import {
   user_action_types as c,
-  cart_action_types as cat,
+  cart_action_types as cart,
 } from "../actions/constants";
 
 const initialState = {
@@ -31,10 +31,16 @@ export default function userReducer(state = initialState, action) {
         loading: false,
       };
 
-    case cat.POST_PRODUCT_TO_CART_SUCCESS:
+    case cart.POST_PRODUCT_TO_CART_SUCCESS:
       return {
         ...state,
         userInfos: { ...state.userInfos, cart: action.payload },
+      };
+
+    case cart.CLEAR_ALL_CATRS:
+      return {
+        ...state,
+        userInfos: { ...state.userInfos, cart: [] },
       };
 
     default:

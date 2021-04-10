@@ -41,6 +41,8 @@ export const getAllCartsFailure = () => ({
   type: c.GET_ALL_CATRS_FAILURE,
 });
 
+export const clearAllCarts = () => ({ type: c.CLEAR_ALL_CATRS });
+
 export function sendAddProductToCart(productId, userId, amount = 1) {
   return async (dispatch) => {
     dispatch(addProductToCart(productId, amount));

@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ProductChangeInput from "../../components/elements/ProductChangeInput";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { fetchWithTokens } from "../../clients";
 import { CircularProgress, Container, Grid } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { apiUrl } from "../../config/envVars";
+import { clearAllCarts } from "../../redux/actions/cartActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +28,7 @@ export default function Checkout() {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -62,6 +64,7 @@ export default function Checkout() {
 
     if (res.statusText === "OK") {
       window.location.replace(res.data.charge.receipt_url);
+      dispatch(clearAllCarts());
     }
 
     if (error) {
@@ -126,7 +129,7 @@ export default function Checkout() {
             ) : (
               <Button
                 type="submit"
-                disabled={!stripe}
+                disabled={!stripe && userInfos.email}
                 color="secondary"
                 variant="contained"
               >
