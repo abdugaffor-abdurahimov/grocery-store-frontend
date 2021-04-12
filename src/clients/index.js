@@ -14,6 +14,20 @@ export const fetchWithTokens = axios.create({
 
 export default fetchDefault;
 
+fetchWithTokens.interceptors.request.use(
+  (config) => {
+    config.headers = {
+      ...config.headers,
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    };
+
+    return config;
+  },
+  (err) => {
+    return Promise.reject(err);
+  }
+);
+
 fetchWithTokens.interceptors.response.use(
   (response) => {
     return response;
@@ -23,8 +37,6 @@ fetchWithTokens.interceptors.response.use(
 
     if (error.message.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-
-      console.log("Refreshing tokens");
 
       return fetchWithTokens
         .post("/users/refreshToken")

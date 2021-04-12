@@ -3,6 +3,7 @@ export const user_action_types = {
   GET_USER: "GET_USER",
   GET_USER_SUCCESS: "GET_USER_SUCCESS",
   GET_USER_FAILURE: "GET_USER_FAILURE",
+  CLEAR_ERRORS: "CLEAR_ERRORS",
 };
 
 export const products_action_types = {

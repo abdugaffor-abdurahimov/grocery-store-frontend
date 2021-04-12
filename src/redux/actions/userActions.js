@@ -14,6 +14,10 @@ export const getUserFailure = (error) => ({
   payload: error,
 });
 
+export const clearUserErrors = () => ({
+  type: c.CLEAR_ERRORS,
+});
+
 export function fetchUser(signal) {
   return async (dispatch) => {
     dispatch(getUser());
@@ -27,6 +31,7 @@ export function fetchUser(signal) {
         dispatch(getUserSuccess(res.data));
       }
     } catch (error) {
+      console.log("error.response", error.res);
       dispatch(getUserFailure(error.message));
     }
   };

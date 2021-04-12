@@ -10,13 +10,13 @@ const useAuth = () => {
     const abortController = new AbortController();
     const signal = abortController.signal;
 
-    if (!error) {
+    if ((!userInfos._id, !error)) {
       dispatch(fetchUser(signal));
     }
     return () => {
       abortController.abort();
     };
-  }, [dispatch, error]);
+  }, [dispatch, userInfos._id, error]);
 
   return { userInfos, loading, error };
 };

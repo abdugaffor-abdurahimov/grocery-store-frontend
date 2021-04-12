@@ -19,8 +19,8 @@ function App() {
   const [cartOpen, setCartOpen] = useState(false);
   const toggleCart = () => setCartOpen(!cartOpen);
   useDocumentTitle(location.pathname.split("/")[1].toUpperCase());
-  useAuth();
   useScrollTop();
+  useAuth();
 
   return (
     <div className="App">

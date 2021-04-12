@@ -13,6 +13,8 @@ import TextField from "../../components/elements/TextField";
 import fetchDefault from "../../clients";
 import { DangerAlert } from "../../components/elements/Alerts";
 import WalmartIcon from "../../components/elements/WalmartIcon";
+import { clearUserErrors } from "../../redux/actions/userActions";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const [inputData, setInputData] = useState({
@@ -27,6 +29,7 @@ const Login = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const dispatch = useDispatch();
 
   const inputDataHandler = (e) => {
     if (e.target.name === "keepSignedIn") {
@@ -53,6 +56,7 @@ const Login = () => {
           localStorage.setItem("refreshToken", res.data.refreshToken);
 
           setTimeout(() => {
+            dispatch(clearUserErrors());
             setLoading(false);
             history.push("/");
           }, 3000);

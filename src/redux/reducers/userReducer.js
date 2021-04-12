@@ -43,6 +43,9 @@ export default function userReducer(state = initialState, action) {
         userInfos: { ...state.userInfos, cart: [] },
       };
 
+    case c.CLEAR_ERRORS:
+      return { ...state, error: null };
+
     default:
       return state;
   }
