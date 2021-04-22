@@ -8,6 +8,14 @@
   .MuiAlert-root {
     padding: 0;
   }
+
+  @media (max-width: 768px) {
+    .makeStyles-searchForm-7 {
+      input {
+        width: 100px;
+      }
+    }
+  }
 }
 
 .App-logo {

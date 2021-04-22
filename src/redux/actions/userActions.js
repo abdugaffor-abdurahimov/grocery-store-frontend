@@ -1,5 +1,6 @@
 import { fetchWithTokens } from "../../clients";
 import { user_action_types as c } from "./constants";
+
 export const getUser = () => ({
   type: c.GET_USER,
 });

@@ -1,18 +1,20 @@
-import { CircularProgress, Container } from "@material-ui/core";
+import { Button, CircularProgress, Container } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { setCurrentProduct } from "../../redux/actions/productsActions";
 import fetchDefault from "../../clients";
 import { Carousel } from "react-responsive-carousel";
 import ProductChangeInput from "../../components/elements/ProductChangeInput";
-
-export const fixedWidth = () => <Carousel width="700px"></Carousel>;
+import { sendAddProductToCart } from "../../redux/actions/cartActions";
 
 export default function Details() {
-  const { currentProduct } = useSelector((state) => state.products);
+  const { products, user } = useSelector((state) => state);
+  const { currentProduct } = products;
+  const { userInfos } = user;
   const { id } = useParams();
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     if (!currentProduct._id) {
@@ -45,11 +47,29 @@ export default function Details() {
             ))}
           </Carousel>
           <br />
-          <ProductChangeInput
-            // value={amount}
-            // userId={userInfos._id}
-            productId={currentProduct._id}
-          />
+          {userInfos.cart.find((item) => item.product._id === id) ? (
+            <ProductChangeInput
+              value={
+                userInfos.cart.find((item) => item.product._id === id).amount
+              }
+              userId={userInfos._id}
+              productId={id}
+            />
+          ) : (
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => {
+                if (userInfos._id) {
+                  dispatch(sendAddProductToCart(id, userInfos._id));
+                } else {
+                  history.push("/login");
+                }
+              }}
+            >
+              Add to Cart
+            </Button>
+          )}
           <br />
           <></>
           <h1>Price: {currentProduct.price} $</h1>

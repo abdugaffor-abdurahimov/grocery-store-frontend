@@ -32,7 +32,7 @@ export default function Appbar(props) {
         onChange={handleChange}
         aria-label="simple tabs example"
       >
-        <Tab label="Grocery.com" onClick={() => history.push("/")} />
+        <Tab label="Grocery" onClick={() => history.push("/")} />
         <Tab
           label="Pickup & delivery"
           onClick={() => history.push("/pickup-delivery")}

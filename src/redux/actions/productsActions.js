@@ -5,7 +5,7 @@ export const getProducts = () => ({
   type: c.GET_PRODUCTS,
 });
 
-export const getUserSuccess = (data) => ({
+export const getProductsSuccess = (data) => ({
   type: c.GET_PRODUCTS_SUCCESS,
   payload: data,
 });
@@ -28,7 +28,7 @@ export function fetchProducts() {
       const res = await fetchDefault.get("/api/products");
 
       if (res.statusText === "OK") {
-        dispatch(getUserSuccess(res.data));
+        dispatch(getProductsSuccess(res.data));
       }
     } catch (error) {
       dispatch(getProductsFailure(error));

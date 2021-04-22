@@ -40,37 +40,41 @@ export default function Checkout() {
       return;
     }
 
-    const res = await fetchWithTokens.post("/api/products/pay", {
-      amount:
-        userInfos.cart
-          .map((item) => item.amount * item.product.price)
-          .reduce((acc, item) => acc + item, 0) * 100,
-      currency: "usd",
-      source: "tok_visa",
-      receipt_email: userInfos.email,
-    });
+    try {
+      const res = await fetchWithTokens.post("/api/products/pay", {
+        amount:
+          userInfos.cart
+            .map((item) => item.amount * item.product.price)
+            .reduce((acc, item) => acc + item, 0) * 100,
+        currency: "usd",
+        source: "tok_visa",
+        receipt_email: userInfos.email,
+      });
 
-    // Get a reference to a mounted CardElement. Elements knows how
-    // to find your CardElement because there can only ever be one of
-    // each type of element.
+      // Get a reference to a mounted CardElement. Elements knows how
+      // to find your CardElement because there can only ever be one of
+      // each type of element.
 
-    const cardElement = elements.getElement(CardElement);
+      // const cardElement = elements.getElement(CardElement);
 
-    // Use your card Element with other Stripe.js APIs
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card: cardElement,
-    });
+      // Use your card Element with other Stripe.js APIs
+      // const { error, paymentMethod } = await stripe.createPaymentMethod({
+      //   type: "card",
+      //   card: cardElement,
+      // });
+      if (res.statusText === "OK") {
+        dispatch(clearAllCarts());
+        window.location.replace(res.data.charge.receipt_url);
+      }
 
-    if (res.statusText === "OK") {
-      window.location.replace(res.data.charge.receipt_url);
-      dispatch(clearAllCarts());
-    }
-
-    if (error) {
-      console.log("[error]", error);
-    } else {
-      console.log("[PaymentMethod]", paymentMethod);
+      // if (error) {
+      //   console.log("[error]", error);
+      // } else {
+      //   console.log("[PaymentMethod]", paymentMethod);
+      // }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
     }
   };
 
