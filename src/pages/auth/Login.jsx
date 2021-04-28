@@ -12,7 +12,6 @@ import {
 import TextField from "../../components/elements/TextField";
 import fetchDefault from "../../clients";
 import { DangerAlert } from "../../components/elements/Alerts";
-import WalmartIcon from "../../components/elements/WalmartIcon";
 import { clearUserErrors } from "../../redux/actions/userActions";
 import { useDispatch } from "react-redux";
 
@@ -86,9 +85,6 @@ const Login = () => {
         <CircularProgress />
       ) : (
         <div>
-          <WalmartIcon />
-          <br />
-          <br />
           <br />
           <Typography variant="h5">Sign in to your </Typography>
           <Typography variant="h5">Walmart account</Typography>
