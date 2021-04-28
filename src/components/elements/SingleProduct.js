@@ -69,7 +69,7 @@ export default function SigleProduct({ product }) {
               if (userInfos._id) {
                 dispatch(sendAddProductToCart(product._id, userInfos._id));
               } else {
-                history.push("/login");
+                history.push("/login?ridirectUrl=pickup-delivery");
               }
             }}
           >

@@ -39,27 +39,30 @@ export default function SingleCart(props) {
   const classes = useStyles();
   const { userInfos } = useSelector((state) => state.user);
   return (
-    <Card className={classes.root}>
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          <Typography component="h5" variant="h5">
-            {props.product.name.slice(0, 10)}
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            Price: {props.product.price} $
-          </Typography>
-          <ProductChangeInput
-            value={props.amount}
-            userId={userInfos._id}
-            productId={props.product._id}
-          />
-        </CardContent>
-      </div>
-      <CardMedia
-        className={classes.cover}
-        image={props.product.images[0]}
-        title="Live from space album cover"
-      />
-    </Card>
+    <>
+      <Card className={classes.root}>
+        <div className={classes.details}>
+          <CardContent className={classes.content}>
+            <Typography component="h5" variant="h5">
+              {props.product.name.slice(0, 10)}
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary">
+              Price: {props.product.price} $
+            </Typography>
+            <ProductChangeInput
+              style={{ width: "86px" }}
+              value={props.amount}
+              userId={userInfos._id}
+              productId={props.product._id}
+            />
+          </CardContent>
+        </div>
+        <CardMedia
+          className={classes.cover}
+          image={props.product.images[0]}
+          title="Live from space album cover"
+        />
+      </Card>
+    </>
   );
 }

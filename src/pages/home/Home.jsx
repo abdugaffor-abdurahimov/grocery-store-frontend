@@ -54,7 +54,9 @@ export default function Home() {
   return (
     <Grid container className={classes.root}>
       {loading ? (
-        <CircularProgress />
+        <div style={{ display: "flex", margin: "auto" }}>
+          <CircularProgress />
+        </div>
       ) : (
         <Container>
           <Carousel>

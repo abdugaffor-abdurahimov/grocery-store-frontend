@@ -36,7 +36,12 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function ProductChangeInput({ value, productId, userId }) {
+export default function ProductChangeInput({
+  value,
+  productId,
+  userId,
+  style,
+}) {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -68,7 +73,12 @@ export default function ProductChangeInput({ value, productId, userId }) {
   };
 
   return (
-    <div variant="subtitle1" color="textSecondary" className={classes.root}>
+    <div
+      style={style}
+      variant="subtitle1"
+      color="textSecondary"
+      className={classes.root}
+    >
       <RemoveIcon
         className={classes.remove}
         onClick={() => {
