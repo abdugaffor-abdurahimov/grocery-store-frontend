@@ -1,4 +1,4 @@
-import { makeStyles, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 
 import React from "react";
 import AddIcon from "@material-ui/icons/Add";
@@ -8,26 +8,31 @@ import { useDispatch } from "react-redux";
 import { postAddProductSuccess } from "../../redux/actions/cartActions";
 
 const useStyles = makeStyles(() => ({
-  root: { display: "flex" },
+  root: {
+    display: "flex",
+    margin: "auto",
+    border: "1px solid black",
+    borderRadius: "15px",
+    width: "110px",
+  },
   input: {
-    width: "50px",
-    borderRadius: "10px",
-    border: "0.5px solid darkgray",
-    height: "20px",
+    border: "none",
+    width: "100%",
+    height: "25px",
+    fontSize: "16px",
+    textAlign: "center",
   },
   add: {
     position: "relative",
-    backgroundColor: "#ffc220",
-    margin: "0 2px",
-    borderRadius: "50%",
     cursor: "pointer",
+    borderLeft: "1px solid black",
+    height: "25px",
   },
   remove: {
     position: "relative",
-    backgroundColor: "#ffc220",
-    margin: "0 2px",
-    borderRadius: "50%",
     cursor: "pointer",
+    borderRight: "1px solid black",
+    height: "25px",
   },
 }));
 
@@ -63,11 +68,7 @@ export default function ProductChangeInput({ value, productId, userId }) {
   };
 
   return (
-    <Typography
-      variant="subtitle1"
-      color="textSecondary"
-      className={classes.root}
-    >
+    <div variant="subtitle1" color="textSecondary" className={classes.root}>
       <RemoveIcon
         className={classes.remove}
         onClick={() => {
@@ -94,6 +95,6 @@ export default function ProductChangeInput({ value, productId, userId }) {
           updateProductAmount(value + 1);
         }}
       />
-    </Typography>
+    </div>
   );
 }

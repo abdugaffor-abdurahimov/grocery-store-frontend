@@ -9,7 +9,6 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import clsx from "clsx";
-import WalmartIcon from "../elements/WalmartIcon";
 import TodayIcon from "@material-ui/icons/Today";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
@@ -40,7 +39,6 @@ export default function CategoryDrawer(props) {
           backgroundColor: "#041e42",
         }}
       >
-        <WalmartIcon width="20px" />{" "}
         <Button color="secondary" onClick={props.toggleDrawer}>
           X
         </Button>
