@@ -18,20 +18,18 @@ export default function Appbar(props) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const toggleDrawer = () => setDrawerOpen(!drawerOpen);
   const { userInfos } = useSelector((state) => state.user);
-  const [currenTab, setCurrentTab] = React.useState(0);
+  const [currenTab, setCurrentTab] = React.useState(
+    window.location.pathname === "/" ? 0 : 1
+  );
   const history = useHistory();
 
-  const handleChange = (e, newValue) => {
-    setCurrentTab(newValue);
+  const handleChange = () => {
+    setCurrentTab(currenTab === 0 ? 1 : 0);
   };
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
-      <Tabs
-        value={currenTab}
-        onChange={handleChange}
-        aria-label="simple tabs example"
-      >
+      <Tabs value={currenTab} onChange={handleChange} aria-label="e-commerce">
         <Tab label="Grocery" onClick={() => history.push("/")} />
         <Tab
           label="Pickup & delivery"
