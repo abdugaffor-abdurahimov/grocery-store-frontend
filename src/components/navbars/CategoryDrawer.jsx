@@ -74,13 +74,6 @@ const SignedIn = () => (
 
     <ListItem button>
       <ListItemIcon>
-        <AddShoppingCartSharpIcon />
-      </ListItemIcon>
-      <ListItemText primary="Walmart" />
-    </ListItem>
-
-    <ListItem button>
-      <ListItemIcon>
         <LocationOnSharpIcon />
       </ListItemIcon>
       <ListItemText primary="Your Location" />

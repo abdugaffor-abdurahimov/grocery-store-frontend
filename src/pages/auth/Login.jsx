@@ -30,6 +30,10 @@ const Login = () => {
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
 
+  const ridirectUrl = new URLSearchParams(window.location.search).get(
+    "ridirectUrl"
+  );
+
   const inputDataHandler = (e) => {
     if (e.target.name === "keepSignedIn") {
       setInputData({ ...inputData, [e.target.name]: e.target.checked });
@@ -57,7 +61,7 @@ const Login = () => {
           setTimeout(() => {
             dispatch(clearUserErrors());
             setLoading(false);
-            history.push("/");
+            history.push(`/${ridirectUrl}`);
           }, 3000);
         }
       })
@@ -86,8 +90,7 @@ const Login = () => {
       ) : (
         <div>
           <br />
-          <Typography variant="h5">Sign in to your </Typography>
-          <Typography variant="h5">Walmart account</Typography>
+          <Typography variant="h5">Sign in to your account</Typography>
           <form noValidate autoComplete="off">
             <TextField
               name="email"
