@@ -7,7 +7,7 @@ const initialState = {
 	currentProduct: {},
 };
 
-export default function productsReducer(state = initialState, action: any) {
+export default function productsReducer(state = initialState, action: Iaction) {
 	switch (action.type) {
 		case c.GET_PRODUCTS:
 			return { ...state, loading: true };
