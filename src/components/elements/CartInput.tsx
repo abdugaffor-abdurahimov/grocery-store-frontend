@@ -1,5 +1,6 @@
 import { Button } from "@material-ui/core";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import React from "react";
 
 const CheckoutForm = () => {
 	const stripe = useStripe();

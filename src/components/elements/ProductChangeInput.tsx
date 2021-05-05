@@ -36,13 +36,6 @@ const useStyles = makeStyles(() => ({
 	},
 }));
 
-interface IProductChangeInput {
-	value: number;
-	productId: string;
-	userId: string;
-	style?: any;
-}
-
 export default function ProductChangeInput({
 	value,
 	productId,
@@ -50,6 +43,7 @@ export default function ProductChangeInput({
 	style,
 }: IProductChangeInput) {
 	const classes = useStyles();
+	const newVal = value ? value : 0;
 
 	const dispatch = useDispatch();
 
@@ -84,7 +78,7 @@ export default function ProductChangeInput({
 			<RemoveIcon
 				className={classes.remove}
 				onClick={() => {
-					updateProductAmount(value - 1);
+					updateProductAmount(newVal - 1);
 				}}
 			/>
 
@@ -104,7 +98,7 @@ export default function ProductChangeInput({
 			<AddIcon
 				className={classes.add}
 				onClick={() => {
-					updateProductAmount(value + 1);
+					updateProductAmount(newVal + 1);
 				}}
 			/>
 		</div>

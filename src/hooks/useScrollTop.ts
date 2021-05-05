@@ -2,12 +2,14 @@ import { useEffect } from "react";
 import { useHistory } from "react-router";
 
 const useScrollTop = () => {
-	const history = useHistory();
+	const { location } = useHistory();
+
+	const scrollToTop = () => window.scroll(0, 0);
 
 	useEffect(() => {
-		// window.scroll(0, 0);
-		// return () => window.removeEventListener("scroll", window.scroll);
-	}, [history.location]);
+		scrollToTop();
+		return () => window.removeEventListener("scroll", scrollToTop);
+	}, [location.pathname]);
 };
 
 export default useScrollTop;

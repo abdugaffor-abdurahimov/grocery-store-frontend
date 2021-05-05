@@ -1,3 +1,0 @@
-interface id {
-	id: string;
-}

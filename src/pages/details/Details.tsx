@@ -9,10 +9,10 @@ import { sendAddProductToCart } from "../../redux/actions/cartActions";
 import client from "../../httpClient";
 
 export default function Details() {
-	const { products, user } = useSelector((state: any) => state.user);
+	const { products, user } = useSelector((state: IState) => state);
 	const { currentProduct } = products;
 	const { userInfos } = user;
-	const { id }: id = useParams();
+	const { id: productId } = useParams<{ id: string }>();
 
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -21,7 +21,7 @@ export default function Details() {
 		if (!currentProduct._id) {
 			const fetchCurrentProduct = async () => {
 				client
-					.get("/api/products/" + id)
+					.get("/api/products/" + productId)
 					.then((response) => {
 						if (response.statusText === "OK") {
 							dispatch(setCurrentProduct(response.data));
@@ -34,7 +34,7 @@ export default function Details() {
 
 			fetchCurrentProduct();
 		}
-	}, [dispatch, id, currentProduct._id]);
+	}, [dispatch, productId, currentProduct._id]);
 
 	return (
 		<Container>
@@ -48,14 +48,17 @@ export default function Details() {
 						))}
 					</Carousel>
 					<br />
-					{userInfos.cart.find((item: any) => item.product._id === id) ? (
+					{userInfos.cart.find(
+						(item: ICart) => item.product._id === productId
+					) ? (
 						<ProductChangeInput
 							value={
-								userInfos.cart.find((item: any) => item.product._id === id)
-									.amount
+								// Tslint:disable-next-line:no-unused-expression
+								userInfos.cart.find((item) => item.product._id === productId)
+									?.amount
 							}
 							userId={userInfos._id}
-							productId={id}
+							productId={productId}
 						/>
 					) : (
 						<Button
@@ -63,7 +66,7 @@ export default function Details() {
 							color="primary"
 							onClick={() => {
 								if (userInfos._id) {
-									dispatch(sendAddProductToCart(id, userInfos._id));
+									dispatch(sendAddProductToCart(productId, userInfos._id));
 								} else {
 									history.push("/login");
 								}

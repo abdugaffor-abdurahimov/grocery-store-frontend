@@ -2,6 +2,10 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 
+interface Props {
+	message: string | undefined;
+}
+
 const useStyles = makeStyles((theme) => ({
 	root: {
 		width: "100%",
@@ -12,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const DangerAlert = (props: any) => {
+export const DangerAlert = (props: Props) => {
 	const classes = useStyles();
 
 	return (

@@ -4,7 +4,6 @@ import {
 	Checkbox,
 	FormControlLabel,
 	FormHelperText,
-	Grid,
 	Typography,
 } from "@material-ui/core";
 import TextField from "../../components/elements/TextField";
@@ -12,51 +11,34 @@ import { Link, useHistory } from "react-router-dom";
 import { DangerAlert } from "../../components/elements/Alerts";
 import Progreses from "../../components/elements/Progreses";
 import client from "../../httpClient";
+import { useForm } from "react-hook-form";
+
+interface IRegister {
+	firstname: string;
+	lastname: string;
+	email: string;
+	password: string;
+	keepSignedIn: boolean;
+	emailNotification: boolean;
+}
 
 const Register = () => {
-	const [inputData, setInputData] = useState({
-		firstname: "",
-		lastname: "",
-		email: "",
-		password: "",
-		keepSignedIn: false,
-		emailNotification: false,
-	});
+	const { handleSubmit, register } = useForm<IRegister>();
 
 	const history = useHistory();
 	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState(null);
+	const [error, setError] = useState<any>();
 
-	const inputDataHandler = (e: any) => {
-		if (
-			e.target.name === "keepSignedIn" ||
-			e.target.name === "emailNotification"
-		) {
-			setInputData({ ...inputData, [e.target.name]: e.target.checked });
-		} else {
-			setInputData({ ...inputData, [e.target.name]: e.target.value });
-		}
-	};
-
-	const handleSubmit = async (e: any) => {
-		e.preventDefault();
+	const onSubmit = async (newUser: IRegister) => {
 		setLoading(true);
 
 		try {
-			const newUser = {
-				firstname: inputData.firstname,
-				lastname: inputData.lastname,
-				email: inputData.email,
-				password: inputData.password,
-			};
 			const res = await client.post("/api/users/register", newUser);
 
-			if ((res.statusText = "ok")) {
+			if (res.status === 200) {
 				setLoading(false);
 				history.push("/login");
 			}
-
-			console.log(res);
 		} catch (error) {
 			setError(error.response.data.errors);
 			setLoading(false);
@@ -64,13 +46,7 @@ const Register = () => {
 	};
 
 	return (
-		<Grid
-			container
-			direction="column"
-			alignItems="center"
-			justify="center"
-			className="auth-grid"
-		>
+		<React.Fragment>
 			{loading ? (
 				<Progreses />
 			) : (
@@ -78,7 +54,11 @@ const Register = () => {
 					<div>
 						<Typography variant="h5">Create a new account</Typography>
 
-						<form noValidate autoComplete="off">
+						<form
+							noValidate
+							autoComplete="off"
+							onSubmit={handleSubmit(onSubmit)}
+						>
 							<Typography
 								display="block"
 								variant="caption"
@@ -88,47 +68,23 @@ const Register = () => {
 							>
 								* required field
 							</Typography>
-							<TextField
-								name="firstname"
-								value={inputData.firstname}
-								onChange={inputDataHandler}
-								label="First name"
-							/>
+							<TextField name="firstname" label="First name" {...register} />
 
-							<TextField
-								name="lastname"
-								value={inputData.lastname}
-								onChange={inputDataHandler}
-								label="First name"
-							/>
+							<TextField label="First name" {...register("lastname")} />
 
-							<TextField
-								name="email"
-								value={inputData.email}
-								onChange={inputDataHandler}
-								label="Email"
-							/>
+							<TextField label="Email" {...register("email")} />
 							<TextField
 								type="password"
-								name="password"
 								label="Create a password"
-								value={inputData.password}
-								onChange={inputDataHandler}
+								{...register("password")}
 							/>
 							<FormControlLabel
-								control={
-									<Checkbox
-										checked={inputData.keepSignedIn}
-										onChange={inputDataHandler}
-										name="keepSignedIn"
-									/>
-								}
+								control={<Checkbox name="keepSignedIn" />}
 								label={<FormHelperText>Keep me signed in </FormHelperText>}
 								labelPlacement="end"
 							/>
 
 							<FormControlLabel
-								onChange={inputDataHandler}
 								name="emailNotification"
 								control={<Checkbox name="emailNotification" />}
 								label={
@@ -148,11 +104,7 @@ const Register = () => {
 								<Link to="#">Privacy Policy</Link>.
 							</Typography>
 
-							<Button
-								variant="contained"
-								color="secondary"
-								onClick={handleSubmit}
-							>
+							<Button variant="contained" color="secondary" type="submit">
 								Create account
 							</Button>
 						</form>
@@ -164,7 +116,7 @@ const Register = () => {
 					</div>
 				</>
 			)}
-		</Grid>
+		</React.Fragment>
 	);
 };
 
