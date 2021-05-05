@@ -4,7 +4,6 @@ import {
 	Checkbox,
 	FormControlLabel,
 	FormHelperText,
-	Grid,
 	Typography,
 } from "@material-ui/core";
 import TextField from "../../components/elements/TextField";
@@ -25,7 +24,7 @@ const Register = () => {
 
 	const history = useHistory();
 	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState(null);
+	const [error, setError] = useState<any>();
 
 	const inputDataHandler = (e: any) => {
 		if (
@@ -64,13 +63,7 @@ const Register = () => {
 	};
 
 	return (
-		<Grid
-			container
-			direction="column"
-			alignItems="center"
-			justify="center"
-			className="auth-grid"
-		>
+		<React.Fragment>
 			{loading ? (
 				<Progreses />
 			) : (
@@ -164,7 +157,7 @@ const Register = () => {
 					</div>
 				</>
 			)}
-		</Grid>
+		</React.Fragment>
 	);
 };
 

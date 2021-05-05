@@ -7,7 +7,6 @@ import { useHistory } from "react-router-dom";
 import { StyledBadge } from "../elements/Badges";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
-import SearchIcon from "@material-ui/icons/Search";
 import useStyles from "../../hooks/useStyles";
 import { useSelector } from "react-redux";
 import Tabs from "@material-ui/core/Tabs";
@@ -55,7 +54,7 @@ export default function Appbar(props: any) {
 					<Button onClick={() => window.location.replace("/")}>Home</Button>
 				</div>
 				<div className={classes.searchBar}>
-					<form className={classes.searchForm}>
+					{/* <form className={classes.searchForm}>
 						<input
 							type="text"
 							spellCheck="true"
@@ -65,7 +64,7 @@ export default function Appbar(props: any) {
 						<IconButton className={classes.serchButton}>
 							<SearchIcon />
 						</IconButton>
-					</form>
+					</form> */}
 				</div>
 				<PermIdentityIcon />
 

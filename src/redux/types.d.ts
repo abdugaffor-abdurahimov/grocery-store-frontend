@@ -8,4 +8,9 @@ interface IUser {
 	cart: ICart[];
 }
 
-interface IProduct {}
+interface IProduct {
+	_id: string;
+	name: string;
+	description: string;
+	images: [string];
+}

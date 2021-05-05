@@ -4,8 +4,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
-
 import { compose, createStore, applyMiddleware } from "redux";
 import rootReducer from "./redux";
 import thunk from "redux-thunk";
@@ -14,6 +12,7 @@ import { Provider } from "react-redux";
 // STRIPE SETUP
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import { BrowserRouter } from "react-router-dom";
 // END OF STRIPE
 const stripe: any = process.env.REACT_APP_STRIPE_API_PUBLIC;
 
@@ -34,11 +33,11 @@ const store = createStore(
 
 ReactDOM.render(
 	<Provider store={store}>
-		<BrowserRouter>
-			<Elements stripe={stripePromise}>
+		<Elements stripe={stripePromise}>
+			<BrowserRouter>
 				<App />
-			</Elements>
-		</BrowserRouter>
+			</BrowserRouter>
+		</Elements>
 	</Provider>,
 	document.getElementById("root")
 );

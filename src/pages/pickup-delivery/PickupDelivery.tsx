@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../redux/actions/productsActions";
 import { Container } from "@material-ui/core";
 import { Carousel } from "react-responsive-carousel";
-import { Alert } from "@material-ui/lab";
 import useStyles from "./PickupDeliveryStyle";
+import { DangerAlert } from "../../components/elements/Alerts";
 
 export default function PickupDelivery() {
 	const classes = useStyles();
@@ -19,16 +19,10 @@ export default function PickupDelivery() {
 		}
 	}, [dispatch, data.length]);
 
-	// const handleChange = (event) => {
-	//   setSpacing(Number(event.target.value));
-	// };
-
 	return (
 		<Grid container className={classes.root}>
 			{error ? (
-				<Alert severity="error">
-					{error.message} please try to refresh the page.
-				</Alert>
+				<DangerAlert message={error.message} />
 			) : (
 				<Container>
 					<Carousel>
@@ -63,7 +57,7 @@ export default function PickupDelivery() {
 
 					<Grid item xs={12}>
 						<Grid container justify="center" spacing={2}>
-							{data.map((product: any, idx: number) => (
+							{data.map((product: IProduct, idx: number) => (
 								<Grid key={idx} item>
 									<SingleProduct product={product} />
 								</Grid>
