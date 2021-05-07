@@ -10,7 +10,7 @@ export const getUserSuccess = (user: IUser) => ({
 	payload: user,
 });
 
-export const getUserFailure = (error: any) => ({
+export const getUserFailure = (error: IError) => ({
 	type: c.GET_USER_FAILURE,
 	payload: error,
 });
@@ -30,7 +30,6 @@ export function fetchUser() {
 				dispatch(getUserSuccess(res.data));
 			}
 		} catch (error) {
-			console.log("error.response", error.res);
 			dispatch(getUserFailure(error.message));
 		}
 	};
