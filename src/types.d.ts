@@ -29,7 +29,7 @@ interface IProduct {
 interface IProductsState {
 	data: IProduct[];
 	loading: boolean;
-	error: null | string;
+	error: string;
 	currentProduct: IProduct;
 }
 
