@@ -14,25 +14,45 @@ import Tab from "@material-ui/core/Tab";
 
 export default function Appbar(props: any) {
 	const classes: any = useStyles();
+
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const toggleDrawer = () => setDrawerOpen(!drawerOpen);
 	const { userInfos } = useSelector((state: any) => state.user);
-	const [currenTab, setCurrentTab] = React.useState(
+	const [currenTab, setCurrentTab] = useState(
 		window.location.pathname === "/" ? 0 : 1
 	);
+
 	const history = useHistory();
 
-	const handleChange = () => {
-		setCurrentTab(currenTab === 0 ? 1 : 0);
+	const handleTabChange = (event: any, newValue: number) => {
+		console.log(newValue);
+
+		setCurrentTab(newValue);
 	};
+
+	function a11yProps(index: number) {
+		return {
+			id: `simple-tab-${index}`,
+			"aria-controls": `simple-tabpanel-${index}`,
+		};
+	}
 
 	return (
 		<AppBar position="fixed" className={classes.appBar}>
-			<Tabs value={currenTab} onChange={handleChange} aria-label="e-commerce">
-				<Tab label="Grocery" onClick={() => history.push("/")} />
+			<Tabs
+				value={currenTab}
+				onChange={handleTabChange}
+				aria-label="e-commerce"
+			>
+				<Tab
+					label="Grocery"
+					onClick={() => history.push("/")}
+					{...a11yProps(1)}
+				/>
 				<Tab
 					label="Pickup & delivery"
 					onClick={() => history.push("/pickup-delivery")}
+					{...a11yProps(1)}
 				/>
 			</Tabs>
 
