@@ -7,7 +7,7 @@ const DefaultLayout = (props: any) => {
 	return (
 		<React.Fragment>
 			<CssBaseline />
-			<Container maxWidth="lg">
+			<Container maxWidth="lg" style={{ minHeight: "90vh" }}>
 				<Typography component="div" style={{ height: "20vh" }} />
 				{props.children}
 			</Container>
