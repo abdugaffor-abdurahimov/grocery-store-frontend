@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import { CircularProgress, Container, Paper } from "@material-ui/core";
 import { Carousel } from "react-responsive-carousel";
-import { Alert } from "@material-ui/lab";
 import { useHistory } from "react-router";
 import client from "../../httpClient";
 import useStyles from "./StylesHome";
+import { DangerAlert } from "../../components/elements/Alerts";
 
 export default function Home() {
 	const classes = useStyles();
@@ -24,8 +24,8 @@ export default function Home() {
 					setPreview(response.data);
 				}
 			} catch (error) {
-				setError(error.response);
-				// setLoading(false);
+				setError(error.message);
+				setLoading(false);
 			}
 		})();
 	}, []);
@@ -33,17 +33,11 @@ export default function Home() {
 	return (
 		<Grid container className={classes.root}>
 			{loading ? (
-				<div
+				<CircularProgress
 					style={{
-						display: "flex",
 						margin: "auto",
-						justifyContent: "center",
-						alignItems: "center",
-						minHeight: "60vh",
 					}}
-				>
-					<CircularProgress />
-				</div>
+				/>
 			) : (
 				<Container>
 					<Carousel>
@@ -105,9 +99,9 @@ export default function Home() {
 						<br />
 
 						{error && (
-							<Alert severity="error">
-								{error.message} please try to refresh the page.
-							</Alert>
+							<DangerAlert
+								message={error + " please try tp refresh the page"}
+							/>
 						)}
 
 						<br />

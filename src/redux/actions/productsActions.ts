@@ -31,7 +31,7 @@ export function fetchProducts() {
 				dispatch(getProductsSuccess(res.data));
 			}
 		} catch (error) {
-			dispatch(getProductsFailure(error));
+			dispatch(getProductsFailure(error.message));
 		}
 	};
 }
