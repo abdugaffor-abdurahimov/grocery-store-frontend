@@ -25,7 +25,7 @@ export default function Home() {
 				}
 			} catch (error) {
 				setError(error.response);
-				setLoading(false);
+				// setLoading(false);
 			}
 		})();
 	}, []);
@@ -33,7 +33,15 @@ export default function Home() {
 	return (
 		<Grid container className={classes.root}>
 			{loading ? (
-				<div style={{ display: "flex", margin: "auto" }}>
+				<div
+					style={{
+						display: "flex",
+						margin: "auto",
+						justifyContent: "center",
+						alignItems: "center",
+						minHeight: "60vh",
+					}}
+				>
 					<CircularProgress />
 				</div>
 			) : (

@@ -49,3 +49,7 @@ interface IProductChangeInput {
 	userId: string;
 	style?: any;
 }
+
+interface IError {
+	message: string | null;
+}
