@@ -3,11 +3,12 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
-		textAlign: "center",
+		// textAlign: "center",
 	},
 	paper: {
-		height: 140,
-		width: 100,
+		padding: theme.spacing(2),
+		textAlign: "center",
+		color: theme.palette.text.secondary,
 	},
 	control: {
 		padding: theme.spacing(2),
@@ -15,7 +16,10 @@ const useStyles = makeStyles((theme) => ({
 	wrapper: {
 		backgroundColor: "white",
 		border: "1px solid #f5f5f5",
-		padding: "30px",
+	},
+	img: {
+		width: "100%",
+		height: "100%",
 	},
 }));
 

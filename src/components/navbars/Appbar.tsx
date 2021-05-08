@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
 import CategoryDrawer from "./CategoryDrawer";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { StyledBadge } from "../elements/Badges";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
@@ -18,15 +18,11 @@ export default function Appbar(props: any) {
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const toggleDrawer = () => setDrawerOpen(!drawerOpen);
 	const { userInfos } = useSelector((state: any) => state.user);
-	const [currenTab, setCurrentTab] = useState(
-		window.location.pathname === "/" ? 0 : 1
-	);
-
+	const { pathname } = useLocation();
+	const [currenTab, setCurrentTab] = useState(pathname === "/" ? 0 : 1);
 	const history = useHistory();
 
 	const handleTabChange = (event: any, newValue: number) => {
-		console.log(newValue);
-
 		setCurrentTab(newValue);
 	};
 
@@ -47,7 +43,7 @@ export default function Appbar(props: any) {
 				<Tab
 					label="Grocery"
 					onClick={() => history.push("/")}
-					{...a11yProps(1)}
+					{...a11yProps(0)}
 				/>
 				<Tab
 					label="Pickup & delivery"

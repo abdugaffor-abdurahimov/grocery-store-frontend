@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./App.scss";
-import "react-multi-carousel/lib/styles.css";
 import DrawerCard from "./components/navbars/CartDrawer";
 import Appbar from "./components/navbars/Appbar";
 import Footer from "./components/footer/Footer";
@@ -15,6 +14,7 @@ function App() {
 	const toggleCart = () => setCartOpen(!cartOpen);
 	const { pathname: path } = useLocation();
 	useDocumentTitle(path.split("/")[1].toUpperCase());
+
 	useScrollTop();
 
 	useAuth();
