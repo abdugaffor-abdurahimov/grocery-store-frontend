@@ -23,6 +23,10 @@ const useStyles = makeStyles({
 	},
 });
 
+interface Props {
+	product: IProduct;
+}
+
 export default function SigleProduct(props: Props) {
 	const { product } = props;
 	const classes = useStyles();
@@ -83,8 +87,4 @@ export default function SigleProduct(props: Props) {
 			</CardActions>
 		</Card>
 	);
-}
-
-interface Props {
-	product: IProduct;
 }

@@ -28,28 +28,22 @@ export default function PickupDelivery() {
 					<div>
 						<img
 							alt="sssssssss"
-							src={
-								"https://res.cloudinary.com/duq2fqsvm/image/upload/c_fill,g_auto,h_300,w_1000/b_rgb:000000,y_-0.50/c_scale,co_rgb:ffffff,y_0.18/v1617082157/amazon/cat2_lj49vw.jpg"
-							}
-						/>{" "}
+							src="https://res.cloudinary.com/duq2fqsvm/image/upload/c_fill,g_auto,h_300,w_1000/b_rgb:000000,y_-0.50/c_scale,co_rgb:ffffff,y_0.18/v1617082157/amazon/cat2_lj49vw.jpg"
+						/>
 						<p className="legend">Buy now</p>
 					</div>
 					<div>
 						<img
 							alt="sssssssss"
-							src={
-								"https://res.cloudinary.com/duq2fqsvm/image/upload/c_fill,g_auto,h_300,w_1000/b_rgb:000000,y_-0.50/c_scale,co_rgb:ffffff,y_0.18/v1617082173/amazon/cat3_hbfwxd.jpg"
-							}
+							src="https://res.cloudinary.com/duq2fqsvm/image/upload/c_fill,g_auto,h_300,w_1000/b_rgb:000000,y_-0.50/c_scale,co_rgb:ffffff,y_0.18/v1617082173/amazon/cat3_hbfwxd.jpg"
 						/>
 						<p className="legend">Lorem, ipsum dolor.</p>
 					</div>
 					<div>
 						<img
 							alt="sssssssss"
-							src={
-								"https://res.cloudinary.com/duq2fqsvm/image/upload/c_fill,g_auto,h_300,w_1000/b_rgb:000000,y_-0.50/c_scale,co_rgb:ffffff,y_0.18/v1617082181/amazon/katalog1_ohyecx.jpg"
-							}
-						/>{" "}
+							src="https://res.cloudinary.com/duq2fqsvm/image/upload/c_fill,g_auto,h_300,w_1000/b_rgb:000000,y_-0.50/c_scale,co_rgb:ffffff,y_0.18/v1617082181/amazon/katalog1_ohyecx.jpg"
+						/>
 						<p className="legend">Lorem, ipsum dolor.</p>
 					</div>
 				</Carousel>
