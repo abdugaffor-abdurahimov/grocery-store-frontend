@@ -1,6 +1,13 @@
 [Backend](https://github.com/abdugaffor-abdurahimov/grocery-store-backend)
 
-[Live](https://e-commerce-client.netlify.app/)
+[See Live](https://e-commerce-client.netlify.app/)
+
+Important: Please be patient if the application slows down. I'm using free hosting !!!
+
+#### Features:
+
+- [x] Strive payments integration
+- [x]
 
 .env configuration
 
