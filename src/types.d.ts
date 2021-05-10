@@ -58,3 +58,15 @@ interface IDataCaracelData {
 	image: string;
 	legend: string;
 }
+
+interface ILogin {
+	email: string;
+	password: string;
+}
+
+interface IRegister extends ILogin {
+	firstname: string;
+	lastname: string;
+	keepSignedIn: boolean;
+	emailNotification: boolean;
+}

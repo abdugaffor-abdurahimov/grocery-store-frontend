@@ -14,11 +14,7 @@ import { clearUserErrors } from "../../redux/actions/userActions";
 import { useDispatch } from "react-redux";
 import client from "../../httpClient";
 import { useForm } from "react-hook-form";
-
-interface ILogin {
-	email: string;
-	password: string;
-}
+import useStyles from "./Auth.styles";
 
 const Login = () => {
 	const { handleSubmit, register } = useForm<ILogin>();
@@ -26,6 +22,7 @@ const Login = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [error, setError] = useState<string>();
 	const dispatch = useDispatch();
+	const classes = useStyles();
 
 	const ridirectUrl = new URLSearchParams(window.location.search).get(
 		"ridirectUrl"
@@ -62,17 +59,24 @@ const Login = () => {
 				<div>
 					<br />
 					<Typography variant="h5">Sign in to your account</Typography>
-					<form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
+					<form
+						noValidate
+						autoComplete="off"
+						onSubmit={handleSubmit(onSubmit)}
+						className={classes.form}
+					>
 						<TextField label="Email" {...register("email")} />
 						<TextField
 							label="Password"
 							type="password"
 							{...register("password")}
 						/>
+						<br />
+						<br />
 						<Link to="###" className="align-end">
 							Forgot password?
 						</Link>
-
+						<br />
 						<FormControlLabel
 							control={<Checkbox name="keepSignedIn" />}
 							label={<FormHelperText>Keep me signed in </FormHelperText>}
@@ -81,7 +85,12 @@ const Login = () => {
 						{error && <DangerAlert message={error} />}
 						<br />
 
-						<Button variant="contained" color="secondary" type="submit">
+						<Button
+							variant="contained"
+							color="primary"
+							type="submit"
+							className={classes.mainBtn}
+						>
 							Sign in
 						</Button>
 					</form>
