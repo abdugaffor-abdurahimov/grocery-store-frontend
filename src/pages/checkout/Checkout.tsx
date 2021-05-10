@@ -28,16 +28,16 @@ export default function Checkout() {
 			return;
 		}
 
-		try {
-			const res = await client.post("/api/products/pay", {
-				amount:
-					userInfos.cart
-						.map((item: any) => item.amount * item.product.price)
-						.reduce((acc: number, item: number) => acc + item, 0) * 100,
-				currency: "usd",
-				source: "tok_visa",
-				receipt_email: userInfos.email,
-			});
+    try {
+      const res = await client.post("/api/products/pay", {
+        amount:
+          userInfos.cart
+            .map((item: any) => item.amount * item.product.price)
+            .reduce((acc: number, item: number) => acc + item, 0) * 100,
+        currency: "usd",
+        source: "tok_visa",
+        receipt_email: userInfos.email,
+      });
 
 			if (res.statusText === "OK") {
 				dispatch(clearAllCarts());

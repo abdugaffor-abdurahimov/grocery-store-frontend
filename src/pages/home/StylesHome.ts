@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	wrapper: {
 		backgroundColor: "white",
-		border: "1px solid #f5f5f5",
+		width: "100%",
 	},
 	img: {
 		width: "100%",

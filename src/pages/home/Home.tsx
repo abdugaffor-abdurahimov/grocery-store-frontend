@@ -45,7 +45,7 @@ export default function Home() {
 					<ResponciveCaraucel data={caroucelData} />
 					<Paper style={{ backgroundColor: "#f5f5f5", padding: "25px 0" }}>
 						<GridLayout>
-							<Grid item sm={4}>
+							<Grid item md={4} sm={4} xs={4}>
 								<div className={classes.wrapper}>
 									<div>Pickup or delivery</div>
 									<img
@@ -55,7 +55,7 @@ export default function Home() {
 									/>
 								</div>
 							</Grid>
-							<Grid item sm={4}>
+							<Grid item md={4} sm={4} xs={4}>
 								<div className={classes.wrapper}>
 									<div>Earn 3% cash back</div>
 									<img
@@ -65,7 +65,7 @@ export default function Home() {
 									/>
 								</div>
 							</Grid>
-							<Grid item sm={4}>
+							<Grid item md={4} sm={4} xs={4}>
 								<div className={classes.wrapper}>
 									<div>No order minimum shipping</div>
 									<img
