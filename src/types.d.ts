@@ -53,3 +53,8 @@ interface IProductChangeInput {
 interface IError {
 	message: string | null;
 }
+
+interface IDataCaracelData {
+	image: string;
+	legend: string;
+}
