@@ -6,8 +6,7 @@ Important: Please be patient if the application slows down. I'm using free hosti
 
 #### Features:
 
-- [x] Strive payments integration
-- [x]
+- [x] Stripe payments integration
 
 .env configuration
 
