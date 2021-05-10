@@ -2,12 +2,7 @@ import React from "react";
 import { Carousel } from "react-responsive-carousel";
 
 interface Props {
-	data: IData[];
-}
-
-interface IData {
-	image: string;
-	legend: string;
+	data: IDataCaracelData[];
 }
 
 const ResponciveCaraucel = ({ data }: Props) => {

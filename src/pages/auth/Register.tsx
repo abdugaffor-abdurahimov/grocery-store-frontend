@@ -12,19 +12,11 @@ import { DangerAlert } from "../../components/elements/Alerts";
 import Progreses from "../../components/elements/Progreses";
 import client from "../../httpClient";
 import { useForm } from "react-hook-form";
-
-interface IRegister {
-	firstname: string;
-	lastname: string;
-	email: string;
-	password: string;
-	keepSignedIn: boolean;
-	emailNotification: boolean;
-}
+import useStyles from "./Auth.styles";
 
 const Register = () => {
 	const { handleSubmit, register } = useForm<IRegister>();
-
+	const classes = useStyles();
 	const history = useHistory();
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<any>();
@@ -58,6 +50,7 @@ const Register = () => {
 							noValidate
 							autoComplete="off"
 							onSubmit={handleSubmit(onSubmit)}
+							className={classes.form}
 						>
 							<Typography
 								display="block"
@@ -85,10 +78,9 @@ const Register = () => {
 							/>
 
 							<FormControlLabel
-								name="emailNotification"
 								control={<Checkbox name="emailNotification" />}
 								label={
-									<FormHelperText>
+									<FormHelperText component="small">
 										Email me about Rollbacks, special pricing, hot new items,
 										gift ideas and more.{" "}
 									</FormHelperText>
@@ -98,13 +90,19 @@ const Register = () => {
 							<br />
 							{error && <DangerAlert message={error} />}
 
-							<Typography className="terms">
+							<Typography className="terms" variant="subtitle2">
 								By clicking Create Account, you acknowledge you have read and
 								agreed to our <Link to="#">Terms of Use</Link> and{" "}
 								<Link to="#">Privacy Policy</Link>.
 							</Typography>
+							<br />
 
-							<Button variant="contained" color="secondary" type="submit">
+							<Button
+								variant="contained"
+								color="primary"
+								type="submit"
+								className={classes.mainBtn}
+							>
 								Create account
 							</Button>
 						</form>

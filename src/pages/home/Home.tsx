@@ -5,9 +5,9 @@ import { useHistory } from "react-router";
 import client from "../../httpClient";
 import useStyles from "./StylesHome";
 import { DangerAlert } from "../../components/elements/Alerts";
-import ResponciveCaraucel from "../../components/elements/ResponciveCaraucel";
 import caroucelData from "./caroucelData";
 import GridLayout from "../../components/layout/GridLayout";
+import MultiCaraucel from "../../components/elements/MultiCaraucel";
 
 export default function Home() {
 	const classes = useStyles();
@@ -42,7 +42,8 @@ export default function Home() {
 				/>
 			) : (
 				<React.Fragment>
-					<ResponciveCaraucel data={caroucelData} />
+					<MultiCaraucel data={caroucelData} />
+
 					<Paper style={{ backgroundColor: "#f5f5f5", padding: "25px 0" }}>
 						<GridLayout>
 							<Grid item md={4} sm={4} xs={4}>
