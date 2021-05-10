@@ -9,11 +9,11 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-function GridLayout({ children }: any): ReactElement {
+function GridLayout({ children, style }: any): ReactElement {
 	const classes = useStyles();
 
 	return (
-		<div className={classes.root}>
+		<div className={classes.root} style={style}>
 			<Grid container spacing={3}>
 				{children}
 			</Grid>

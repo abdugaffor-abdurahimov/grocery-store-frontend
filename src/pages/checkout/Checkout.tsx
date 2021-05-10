@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,7 +20,7 @@ export default function Checkout() {
 	const [loading, setLoading] = useState(false);
 	const dispatch = useDispatch();
 
-	const handleSubmit = async (event: any) => {
+	const handleSubmit = async (event: FormEvent) => {
 		event.preventDefault();
 		setLoading(true);
 
@@ -28,16 +28,16 @@ export default function Checkout() {
 			return;
 		}
 
-    try {
-      const res = await client.post("/api/products/pay", {
-        amount:
-          userInfos.cart
-            .map((item: any) => item.amount * item.product.price)
-            .reduce((acc: number, item: number) => acc + item, 0) * 100,
-        currency: "usd",
-        source: "tok_visa",
-        receipt_email: userInfos.email,
-      });
+		try {
+			const res = await client.post("/api/products/pay", {
+				amount:
+					userInfos.cart
+						.map((item: any) => item.amount * item.product.price)
+						.reduce((acc: number, item: number) => acc + item, 0) * 100,
+				currency: "usd",
+				source: "tok_visa",
+				receipt_email: userInfos.email,
+			});
 
 			if (res.statusText === "OK") {
 				dispatch(clearAllCarts());
@@ -51,7 +51,7 @@ export default function Checkout() {
 
 	return (
 		<GridLayout>
-			<Grid item xs={12} md={6}>
+			<Grid item xs={12} md={6} sm={6}>
 				<Typography variant="h6" className={classes.title}>
 					<b>{userInfos.cart.length} items</b>
 					<Button
@@ -65,18 +65,16 @@ export default function Checkout() {
 
 				{userInfos.cart.map((item: ICart, idx: number) => (
 					<GridLayout key={idx}>
-						<Grid item>
+						<Grid item xs={10}>
 							<img
 								src={item.product.images[0]}
 								alt={item.product.name + "img"}
-								width="300px"
+								style={{ maxWidth: "200px" }}
 							/>
 						</Grid>
-						<Grid item>
+						<Grid item xs={10}>
 							<p>Name: {item.product.name}</p>
 							<p>Price: {item.product.price} $</p>
-							<br />
-							<br />
 							<ProductChangeInput
 								value={item.amount}
 								userId={userInfos._id}
@@ -88,7 +86,7 @@ export default function Checkout() {
 				))}
 			</Grid>
 
-			<Grid item xs={12} md={6} style={{ maxWidth: "400px" }}>
+			<Grid item xs={12} md={6} sm={6} style={{ maxWidth: "400px" }}>
 				<Typography variant="body1">
 					Subtotal:
 					<b>

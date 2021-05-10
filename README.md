@@ -2,7 +2,7 @@
 
 [Live](https://e-commerce-client.netlify.app/)
 
-.env config
+.env configuration
 
 - REACT_APP_API_URL
 - REACT_APP_STRIPE_API_PUBLIC => stripe key
